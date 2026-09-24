@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the software release and associated article when available."
+title: "ModelicaHumanBodyPArts"
+type: software
+version: "0.10.0"
+date-released: "2026-09-24"
+authors:
+  - family-names: "Anton"
+    given-names: "Tofic"
+    orcid: "https://orcid.org/0009-0000-5409-0417"
+license: "MIT"
+repository-code: "https://github.com/antontofic000-creator/ModelicaHumanBodyPArts"
+url: "https://www.lynkorr.com/"
+abstract: "Verification-oriented Modelica research software for auditable human multibody mechanics, distributed plantar contact, reaction wrenches, power and energy accounting, and reproducible numerical verification."
+keywords:
+  - Modelica
+  - multibody dynamics
+  - biomechanics
+  - research software
+  - contact mechanics
+  - verification
