@@ -1,0 +1,749 @@
+{
+  "schema_version": 1,
+  "study_title": "When is a rigid pelvis-trunk approximation sufficient? A controlled model-reduction study of lumbar mobility in multibody biomechanics",
+  "software": {
+    "version": "0.10.0",
+    "path": "../../src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo",
+    "sha256": "2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b",
+    "doi": "10.5281/zenodo.22941517"
+  },
+  "experiment_source": {
+    "path": "ModelicaHumanBodyPArtsArticle2.mo",
+    "sha256": "ae354a846f66823457e01520d49bd55e5b863177481bc3fad96abe5439ac6aa6"
+  },
+  "environment": {
+    "openmodelica": "1.27.1",
+    "modelica_standard_library": "4.1.0"
+  },
+  "campaigns": {
+    "nominal": [
+      {
+        "id": "nominal_R_A1",
+        "modifiers": "rightStance=true,architecture=1,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "nominal_R_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "nominal_R_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "nominal_L_A1",
+        "modifiers": "rightStance=false,architecture=1,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "nominal_L_A2",
+        "modifiers": "rightStance=false,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "nominal_L_A3",
+        "modifiers": "rightStance=false,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      }
+    ],
+    "robustness": [
+      {
+        "id": "rob_drive_a10_h0p5_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a10_h0p5_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a10_h0p5_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a10_h1_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a10_h1_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a10_h1_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a10_h1p5_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a10_h1p5_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a10_h1p5_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=10,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h0p5_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h0p5_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h0p5_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h1_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h1_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h1_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h1p5_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h1p5_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a15_h1p5_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h0p5_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h0p5_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h0p5_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-0.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h1_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h1_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h1_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h1p5_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h1p5_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_drive_a20_h1p5_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=20,hipAmplitude=-1.5,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_fric_0p45_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.45,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_fric_0p45_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.45,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_fric_0p45_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.45,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_fric_0p75_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.75,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_fric_0p75_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.75,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_fric_0p75_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.75,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_kn_100000_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=100000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_kn_100000_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=100000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_kn_100000_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=100000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_kn_400000_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=400000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_kn_400000_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=400000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_kn_400000_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=400000,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_posture_am0p02_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.02,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_posture_am0p02_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.02,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_posture_am0p02_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,-0.02,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_posture_a0_A1",
+        "modifiers": "rightStance=true,architecture=1,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,0,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_posture_a0_A2",
+        "modifiers": "rightStance=true,architecture=2,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,0,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "rob_posture_a0_A3",
+        "modifiers": "rightStance=true,architecture=3,hold=0.6,fall=0.2,impedanceMode=0,ankleAmplitude=15,hipAmplitude=-1,friction=0.6,normalStiffness=200000,freeQ0={0.25,0,0,0.5,0,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      }
+    ],
+    "sensitivity": [
+      {
+        "id": "sens_kTrans_100_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,100,100,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kTrans_100_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,100,100,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kTrans_300_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,300,300,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kTrans_300_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,300,300,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kTrans_1000_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kTrans_1000_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kTrans_3000_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,3000,3000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kTrans_3000_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,3000,3000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_cTrans_10_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,10,10,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_cTrans_10_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,10,10,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_cTrans_100_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,100,100,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_cTrans_100_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,100,100,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kAx_10_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,10},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kAx_10_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,10},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kAx_40_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,40},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_kAx_40_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,40},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,1}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_cAx_0p5_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,0.5}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_cAx_0p5_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,0.5}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_cAx_2_A2",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,2}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "sens_cAx_2_A3",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173},springK={25,20,4,20,10,10,1000,1000,20,1200,2000,2000,1000,1000,20},damperC={1.5,2,1.5,1,1,1,60,60,2,60,100,100,50,50,2}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      }
+    ],
+    "refinement": [
+      {
+        "id": "ref_R_A1_base",
+        "modifiers": "rightStance=true,architecture=1,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "ref_R_A1_fine",
+        "modifiers": "rightStance=true,architecture=1,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 1500,
+        "tolerance": 1e-9,
+        "maxStep": 0.002
+      },
+      {
+        "id": "ref_R_A1_finer",
+        "modifiers": "rightStance=true,architecture=1,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 3000,
+        "tolerance": 1e-10,
+        "maxStep": 0.001
+      },
+      {
+        "id": "ref_R_A2_base",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "ref_R_A2_fine",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 1500,
+        "tolerance": 1e-9,
+        "maxStep": 0.002
+      },
+      {
+        "id": "ref_R_A2_finer",
+        "modifiers": "rightStance=true,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 3000,
+        "tolerance": 1e-10,
+        "maxStep": 0.001
+      },
+      {
+        "id": "ref_R_A3_base",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "ref_R_A3_fine",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 1500,
+        "tolerance": 1e-9,
+        "maxStep": 0.002
+      },
+      {
+        "id": "ref_R_A3_finer",
+        "modifiers": "rightStance=true,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 3000,
+        "tolerance": 1e-10,
+        "maxStep": 0.001
+      },
+      {
+        "id": "ref_L_A1_base",
+        "modifiers": "rightStance=false,architecture=1,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "ref_L_A1_fine",
+        "modifiers": "rightStance=false,architecture=1,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 1500,
+        "tolerance": 1e-9,
+        "maxStep": 0.002
+      },
+      {
+        "id": "ref_L_A1_finer",
+        "modifiers": "rightStance=false,architecture=1,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 3000,
+        "tolerance": 1e-10,
+        "maxStep": 0.001
+      },
+      {
+        "id": "ref_L_A2_base",
+        "modifiers": "rightStance=false,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "ref_L_A2_fine",
+        "modifiers": "rightStance=false,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 1500,
+        "tolerance": 1e-9,
+        "maxStep": 0.002
+      },
+      {
+        "id": "ref_L_A2_finer",
+        "modifiers": "rightStance=false,architecture=2,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 3000,
+        "tolerance": 1e-10,
+        "maxStep": 0.001
+      },
+      {
+        "id": "ref_L_A3_base",
+        "modifiers": "rightStance=false,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 750,
+        "tolerance": 1e-8,
+        "maxStep": 0.004
+      },
+      {
+        "id": "ref_L_A3_fine",
+        "modifiers": "rightStance=false,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 1500,
+        "tolerance": 1e-9,
+        "maxStep": 0.002
+      },
+      {
+        "id": "ref_L_A3_finer",
+        "modifiers": "rightStance=false,architecture=3,ankleAmplitude=15,hipAmplitude=-1,hold=0.6,fall=0.2,impedanceMode=0,freeQ0={0.25,0,0,0.5,-0.03,0.115275665089173}",
+        "stop": 1.5,
+        "intervals": 3000,
+        "tolerance": 1e-10,
+        "maxStep": 0.001
+      }
+    ]
+  },
+  "analytical_benchmark": {
+    "model": "A2TwoInertiaBenchmark",
+    "source": "A2TwoInertiaBenchmark.mo",
+    "stop": 1,
+    "intervals": 2000,
+    "tolerance": 1e-10,
+    "maxStep": 0.0005,
+    "verified_max_delta_error_rad": 7.572103222219795e-10
+  }
+}
