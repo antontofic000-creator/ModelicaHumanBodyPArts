@@ -22,13 +22,17 @@ ModelicaHumanBodyPArts is a verification-oriented Modelica library for auditable
 - Two fresh-directory clean reruns passed
 - Source SHA-256: `2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b`
 
-## Repository layout
 ## Downloads and archives
 
+- **Public Master Guide:** [Read/download the 39-page teaching and reproduction guide](ModelicaHumanBodyPArts_v0_10_Public_Master_Guide_Lynkorr.com.pdf)
 - **Archived v0.10.0 release:** [Zenodo DOI 10.5281/zenodo.22941517](https://doi.org/10.5281/zenodo.22941517)
 - **Direct archived release ZIP:** [Download from Zenodo](https://zenodo.org/api/records/22941517/files/antontofic000-creator/ModelicaHumanBodyPArts-V0.10.0.zip/content)
+- **GitHub-hosted open release ZIP:** [Download v0.10.0 open release](ModelicaHumanBodyPArts_v0_10_0_OPEN_RELEASE.zip)
 - **GitHub v0.10.0 release:** [View release](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/releases/tag/v0.10.0)
 - **Exact verified RC1 source:** [`src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo`](src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo)
+
+## Repository layout
+
 - `src/` — exact Modelica source used by the publication-candidate verification campaign
 - `tests/` — registered verification/build manifest
 - `scripts/` — native release runner
