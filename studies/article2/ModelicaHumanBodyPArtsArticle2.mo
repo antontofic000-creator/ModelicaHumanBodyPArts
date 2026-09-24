@@ -1,4 +1,4 @@
-within;
+﻿within;
 package ModelicaHumanBodyPArtsArticle2
   "Distributed contact research branch; not a human-validated or released package"
   import SI=Modelica.Units.SI;
@@ -669,3 +669,4 @@ package ModelicaHumanBodyPArtsArticle2
   end LeftCombined;
   annotation(uses(Modelica(version="4.1.0"),ModelicaHumanBodyPArts(version="0.10.0")));
 end ModelicaHumanBodyPArtsArticle2;
+
