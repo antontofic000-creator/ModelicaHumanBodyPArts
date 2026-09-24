@@ -3,6 +3,7 @@ message: "If you use this software, please cite the software release and associa
 title: "ModelicaHumanBodyPArts"
 type: software
 version: "0.10.0"
+doi: "10.5281/zenodo.22941517"
 date-released: "2026-09-24"
 authors:
   - family-names: "Anton"
