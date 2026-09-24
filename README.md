@@ -1,6 +1,14 @@
 # ModelicaHumanBodyPArts
 
-**Version 0.10.0 RC1 — open-source publication candidate**
+[![DOI](https://zenodo.org/badge/1385543378.svg)](https://doi.org/10.5281/zenodo.22941516)
+
+**Public release:** v0.10.0  
+**Verified publication-candidate source:** v0.10.0 RC1  
+**Version-specific Zenodo DOI:** [10.5281/zenodo.22941517](https://doi.org/10.5281/zenodo.22941517)  
+**Concept DOI / all versions:** [10.5281/zenodo.22941516](https://doi.org/10.5281/zenodo.22941516)
+
+**Exact verified source SHA-256:**  
+`2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b`
 
 ModelicaHumanBodyPArts is a verification-oriented Modelica library for auditable human multibody mechanics. It connects explicit multibody assumptions to source-aware parameters, rigid-body segments and joints, distributed plantar contact, reaction wrenches, power and energy outputs, and reproducible numerical verification.
 
@@ -15,7 +23,12 @@ ModelicaHumanBodyPArts is a verification-oriented Modelica library for auditable
 - Source SHA-256: `2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b`
 
 ## Repository layout
+## Downloads and archives
 
+- **Archived v0.10.0 release:** [Zenodo DOI 10.5281/zenodo.22941517](https://doi.org/10.5281/zenodo.22941517)
+- **Direct archived release ZIP:** [Download from Zenodo](https://zenodo.org/api/records/22941517/files/antontofic000-creator/ModelicaHumanBodyPArts-V0.10.0.zip/content)
+- **GitHub v0.10.0 release:** [View release](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/releases/tag/v0.10.0)
+- **Exact verified RC1 source:** [`src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo`](src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo)
 - `src/` — exact Modelica source used by the publication-candidate verification campaign
 - `tests/` — registered verification/build manifest
 - `scripts/` — native release runner
@@ -47,6 +60,8 @@ Modelica Standard Library 4.1.0 is an external dependency and is separately lice
 - Project website: https://www.lynkorr.com/
 - ORCID: https://orcid.org/0009-0000-5409-0417
 - Repository: https://github.com/antontofic000-creator/ModelicaHumanBodyPArts
+- Version DOI: https://doi.org/10.5281/zenodo.22941517
+- Concept DOI: https://doi.org/10.5281/zenodo.22941516
 
 ## Publication status
 
