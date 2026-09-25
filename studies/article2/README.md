@@ -2,7 +2,7 @@
 
 Reproduction materials for:
 
-**Toufic Antoun El Halabi**, *When is a rigid pelvis–trunk approximation sufficient? A controlled model-reduction study of lumbar mobility in multibody biomechanics.*
+**Toufic Antoun El Halabi**, *When is a rigid pelvis–trunk approximation sufficient? An output-specific model-reduction protocol applied to lumbar mobility in multibody biomechanics.*
 
 **Status:** manuscript in preparation / not yet published.
 
@@ -32,7 +32,7 @@ GitHub's text representation has SHA-256:
 
 `1402b0cc88661f632bddd0f9f597b07e2c58c0ddec1858fac9c891aeebf1db85`
 
-The text content is identical; the byte-level difference is only the text-file ending/encoding representation. The study-data archive will preserve the exact executed bytes.
+The text content is identical; the byte-level difference is only the text-file ending/encoding representation. The Zenodo study-data archive preserves the exact executed bytes.
 
 ## Verified v0.10.0 campaign
 
@@ -85,4 +85,10 @@ The study is a controlled **computational multibody model-reduction** experiment
 
 ## Research-data archive
 
-The exact raw outputs, logs, refinement results and source snapshots are being prepared as a separate Zenodo dataset. Its version-specific DOI will be added here and to the manuscript once the record is published.
+The exact raw outputs, logs, refinement results, source snapshots and reproduction scripts are archived as a separate Zenodo dataset:
+
+- Article 2 dataset DOI: [10.5281/zenodo.22957144](https://doi.org/10.5281/zenodo.22957144)
+- Archive file: `ModelicaHumanBodyPArts_Article2_v010_REPRO_ZENODO_FINAL_20260925.zip`
+- Archive SHA-256: `e8bf10157470ceeee28715d8603d4572f13630011fa618d37973df85852c16f7`
+- Research data / non-software documentation: CC BY 4.0
+- Software/code: MIT License
