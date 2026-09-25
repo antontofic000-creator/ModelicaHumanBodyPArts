@@ -33,7 +33,7 @@ ModelicaHumanBodyPArts is a verification-oriented Modelica library for auditable
 
 ## Studies
 
-- **Article 2 lumbar model-reduction study:** [public experiment package and reproduction scripts](studies/article2_lumbar_model_reduction/README.md)
+- **Article 2 lumbar model-reduction study:** [public experiment package, manifest and portable reproduction runner](studies/article2/README.md)
 
 ## Repository layout
 
