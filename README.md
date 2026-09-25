@@ -31,6 +31,10 @@ ModelicaHumanBodyPArts is a verification-oriented Modelica library for auditable
 - **GitHub v0.10.0 release:** [View release](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/releases/tag/v0.10.0)
 - **Exact verified RC1 source:** [`src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo`](src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo)
 
+## Studies
+
+- **Article 2 lumbar model-reduction study:** [public experiment package and reproduction scripts](studies/article2_lumbar_model_reduction/README.md)
+
 ## Repository layout
 
 - `src/` — exact Modelica source used by the publication-candidate verification campaign
