@@ -63,6 +63,14 @@ Copyright (c) 2026 Tofic Anton. Released under the MIT License. See `LICENSE`.
 
 Modelica Standard Library 4.1.0 is an external dependency and is separately licensed by the Modelica Association. See `THIRD_PARTY_NOTICES.md`.
 
+## Author
+
+Created by **Tofic Anton**, known academically as **Toufic Antoun El Halabi** (also published as Toufic El Halabi and T. Elhalabi), an engineering professor at the Physics Department, Lebanese University, and an Argentine tango teacher and creator of Lynkorr.
+
+- [Biography and academic identity](https://www.lynkorr.com/about)
+- [ORCID research record](https://orcid.org/0009-0000-5409-0417)
+- [ResearchGate profile](https://www.researchgate.net/profile/Toufic-El-Halabi)
+
 ## Project
 
 - Project website: https://www.lynkorr.com/
