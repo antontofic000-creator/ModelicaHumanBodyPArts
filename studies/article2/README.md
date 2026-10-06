@@ -53,17 +53,21 @@ A simulation must report successful completion, have `checksPassed >= 1`, cover 
 
 ## Public records
 
-Software: https://doi.org/10.5281/zenodo.22941517
+Software (unchanged frozen release): https://doi.org/10.5281/zenodo.22941517
 
-Historical dataset version: https://doi.org/10.5281/zenodo.22957144
+Revised dataset, published October 6, 2026: https://doi.org/10.5281/zenodo.23175126
+
+Revised preprint, published October 6, 2026: https://doi.org/10.5281/zenodo.23175187
 
 Dataset concept: https://doi.org/10.5281/zenodo.22957143
 
-Historical preprint: https://doi.org/10.5281/zenodo.22958896
+Historical September dataset: https://doi.org/10.5281/zenodo.22957144
+
+Historical September preprint: https://doi.org/10.5281/zenodo.22958896
 
 Reproduction repository: https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/tree/main/studies/article2
 
-The revision archive and new dataset/preprint versions are being prepared separately. The linked dataset and preprint DOIs above identify the September historical versions. No new version DOI is claimed before reservation/publication.
+The versioned dataset contains `ModelicaHumanBodyPArts_Article2_v010_REPRO_REV2_20261006.zip` (112,195,632 bytes), SHA-256 `425b117ba25de9bb1d3bb0517eb1b3e54770157f48ad0cd64119957050655255`. Its frozen study commit is `cdf17e684e4f0c79277651d88bf9c7bac397243d`; subsequent publication-link updates do not change the archived files.
 
 ## Licensing
 
