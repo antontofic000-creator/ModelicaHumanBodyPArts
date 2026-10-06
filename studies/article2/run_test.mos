@@ -1,0 +1,57 @@
+// From the archive/study directory: omc run_test.mos
+// Requires OpenModelica plus Node.js for CSV verification; no physics are duplicated.
+studyRoot := cd();
+writeFile("test_summary.json","{\"schema_version\":1,\"status\":\"RUNNING\",\"cases\":[]}");
+mslLoaded := loadModel(Modelica,{"4.1.0"},requireExactVersion=true);
+if not mslLoaded then
+  writeFile("test_summary.json","{\"status\":\"FAIL\",\"stage\":\"load_MSL_4.1.0\"}");
+  print(getErrorString()); exit(1);
+end if;
+if getVersion(Modelica)<>"4.1.0" then exit(1); end if;
+writeFile("test_environment.json","{\"compiler\":\""+getVersion()+"\",\"modelica\":\""+getVersion(Modelica)+"\"}");
+setCommandLineOptions("--maxSizeLinearTearing=300");
+libraryFile := if regularFileExists("code/ModelicaHumanBodyPArts_v0_10_0_RC1.mo") then "code/ModelicaHumanBodyPArts_v0_10_0_RC1.mo" elseif regularFileExists("../../src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo") then "../../src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo" else "ModelicaHumanBodyPArts_v0_10_0_RC1.mo";
+primaryFile := if regularFileExists("code/ModelicaHumanBodyPArtsArticle2.mo") then "code/ModelicaHumanBodyPArtsArticle2.mo" else "ModelicaHumanBodyPArtsArticle2.mo";
+upperFile := if regularFileExists("code/ModelicaHumanBodyPArtsArticle2_UpperBody.mo") then "code/ModelicaHumanBodyPArtsArticle2_UpperBody.mo" else "ModelicaHumanBodyPArtsArticle2_UpperBody.mo";
+libraryLoaded := loadFile(libraryFile);
+primaryLoaded := loadFile(primaryFile);
+upperLoaded := loadFile(upperFile);
+testsLoaded := loadFile("test.mo");
+if not libraryLoaded or not primaryLoaded or not upperLoaded or not testsLoaded then
+  writeFile("test_summary.json","{\"status\":\"FAIL\",\"stage\":\"load_sources\"}");
+  print(getErrorString()); exit(1);
+end if;
+mkdir("generated"); mkdir("generated/smoke"); cd(studyRoot+"/generated/smoke");
+clearMessages();
+print("RUN UpperBodyKnownAnswer\n");
+sim := simulate(Article2ReproductionTests.UpperBodyKnownAnswer,startTime=0,stopTime=0.5,numberOfIntervals=1000,tolerance=1e-10,method="dassl",outputFormat="csv",fileNamePrefix="UpperBodyKnownAnswer",variableFilter="time|checksPassed|expectedTorque|measuredTorque|add.addedMass|add.yawInertiaAboutBase",simflags="-lv=LOG_STATS -maxStepSize=0.0005");
+writeFile("UpperBodyKnownAnswer.log",sim.messages+"\n"+getErrorString());
+clearMessages();
+print("RUN PrimaryLocked\n");
+sim := simulate(Article2ReproductionTests.PrimaryLocked,startTime=0,stopTime=1.5,numberOfIntervals=750,tolerance=1e-8,method="dassl",outputFormat="csv",fileNamePrefix="PrimaryLocked",variableFilter="time|checksPassed|energyResidual|pelvisYaw|thoraxYaw|heelShare|stanceAxis|freeDeltaHip.*|groundForce.*|groundMoment.*",simflags="-lv=LOG_STATS -maxStepSize=0.004");
+writeFile("PrimaryLocked.log",sim.messages+"\n"+getErrorString());
+clearMessages();
+print("RUN PrimaryYawOnly\n");
+sim := simulate(Article2ReproductionTests.PrimaryYawOnly,startTime=0,stopTime=1.5,numberOfIntervals=750,tolerance=1e-8,method="dassl",outputFormat="csv",fileNamePrefix="PrimaryYawOnly",variableFilter="time|checksPassed|energyResidual|pelvisYaw|thoraxYaw|heelShare|stanceAxis|freeDeltaHip.*|groundForce.*|groundMoment.*",simflags="-lv=LOG_STATS -maxStepSize=0.004");
+writeFile("PrimaryYawOnly.log",sim.messages+"\n"+getErrorString());
+clearMessages();
+print("RUN PrimaryFull3D\n");
+sim := simulate(Article2ReproductionTests.PrimaryFull3D,startTime=0,stopTime=1.5,numberOfIntervals=750,tolerance=1e-8,method="dassl",outputFormat="csv",fileNamePrefix="PrimaryFull3D",variableFilter="time|checksPassed|energyResidual|pelvisYaw|thoraxYaw|heelShare|stanceAxis|freeDeltaHip.*|groundForce.*|groundMoment.*",simflags="-lv=LOG_STATS -maxStepSize=0.004");
+writeFile("PrimaryFull3D.log",sim.messages+"\n"+getErrorString());
+clearMessages();
+print("RUN UpperBodyLocked\n");
+sim := simulate(Article2ReproductionTests.UpperBodyLocked,startTime=0,stopTime=1.5,numberOfIntervals=750,tolerance=1e-8,method="dassl",outputFormat="csv",fileNamePrefix="UpperBodyLocked",variableFilter="time|checksPassed|energyResidual|pelvisYaw|thoraxYaw|heelShare|stanceAxis|freeDeltaHip.*|groundForce.*|groundMoment.*",simflags="-lv=LOG_STATS -maxStepSize=0.004");
+writeFile("UpperBodyLocked.log",sim.messages+"\n"+getErrorString());
+clearMessages();
+print("RUN UpperBodyYawOnly\n");
+sim := simulate(Article2ReproductionTests.UpperBodyYawOnly,startTime=0,stopTime=1.5,numberOfIntervals=750,tolerance=1e-8,method="dassl",outputFormat="csv",fileNamePrefix="UpperBodyYawOnly",variableFilter="time|checksPassed|energyResidual|pelvisYaw|thoraxYaw|heelShare|stanceAxis|freeDeltaHip.*|groundForce.*|groundMoment.*",simflags="-lv=LOG_STATS -maxStepSize=0.004");
+writeFile("UpperBodyYawOnly.log",sim.messages+"\n"+getErrorString());
+clearMessages();
+print("RUN UpperBodyFull3D\n");
+sim := simulate(Article2ReproductionTests.UpperBodyFull3D,startTime=0,stopTime=1.5,numberOfIntervals=750,tolerance=1e-8,method="dassl",outputFormat="csv",fileNamePrefix="UpperBodyFull3D",variableFilter="time|checksPassed|energyResidual|pelvisYaw|thoraxYaw|heelShare|stanceAxis|freeDeltaHip.*|groundForce.*|groundMoment.*",simflags="-lv=LOG_STATS -maxStepSize=0.004");
+writeFile("UpperBodyFull3D.log",sim.messages+"\n"+getErrorString());
+cd(studyRoot);
+gateStatus := system("node \""+studyRoot+"/verify_test_results.mjs\" \""+studyRoot+"\"");
+if gateStatus<>0 then exit(1); end if;
+print("PASS: seven Article 2 reproduction checks\n");
+exit(0);

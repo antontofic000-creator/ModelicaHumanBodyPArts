@@ -7,10 +7,11 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(here, '..', '..');
 const manifest = JSON.parse(fs.readFileSync(path.join(here, 'article2_manifest.json'), 'utf8'));
-const lib = path.resolve(here, manifest.software.path);
-const study = path.resolve(here, manifest.experiment_source.path);
-const outRoot = path.join(here, 'article2_results');
-const omc = process.env.OMC_PATH ||
+const locate = (spec, fallback) => [spec.path, spec.repository_path, fallback].filter(Boolean).map(p=>path.resolve(here,p)).find(fs.existsSync);
+const lib = locate(manifest.software, '../../src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo');
+const study = locate(manifest.experiment_source, 'ModelicaHumanBodyPArtsArticle2.mo');
+const outRoot = path.join(here, 'generated', 'primary_'+new Date().toISOString().replace(/[^0-9TZ]/g,''));
+const omc = process.env.OMC || process.env.OMC_PATH ||
   (process.platform === 'win32' && fs.existsSync('C:/Program Files/OpenModelica1.27.1-64bit/bin/omc.exe')
     ? 'C:/Program Files/OpenModelica1.27.1-64bit/bin/omc.exe'
     : 'omc');
@@ -49,15 +50,16 @@ function runCase(campaign, c) {
   const log = (p.stdout || '') + '\n' + (p.stderr || '');
   fs.writeFileSync(path.join(d, 'run.log'), log);
   const csv = path.join(d, 'model_res.csv');
-  let status = 'FAIL', finalTime = null, checksPassed = null;
+  let status = 'FAIL', finalTime = null, checksPassed = null, maxEnergyResidual = null;
   if (p.status === 0 && fs.existsSync(csv)) {
     const {header, rows} = parseCsv(csv);
-    const ti = header.indexOf('time'), ci = header.indexOf('checksPassed');
+    const ti = header.indexOf('time'), ci = header.indexOf('checksPassed'), ei = header.indexOf('energyResidual');
     finalTime = rows.at(-1)?.[ti];
     checksPassed = rows.at(-1)?.[ci];
-    if (Math.abs(finalTime - c.stop) < 1e-8 && checksPassed >= 1 && !/LOG_ASSERT\s*\|\s*(error|debug)|Error:/i.test(log)) status='PASS';
+    maxEnergyResidual = ei<0 ? Infinity : Math.max(...rows.map(r=>Math.abs(r[ei])));
+    if (finalTime >= c.stop-0.001 && finalTime <= c.stop+0.005 && checksPassed >= 1 && Number.isFinite(maxEnergyResidual) && maxEnergyResidual < 0.01 && /The simulation finished successfully/.test(log) && !/LOG_ASSERT\s*\|\s*(error|debug)|simulation terminated|assertion has been violated|Execution failed!/i.test(log)) status='PASS';
   }
-  const result = { campaign, id:c.id, status, finalTime, checksPassed, settings:c, software_sha256:sha256(lib), study_source_sha256:sha256(study) };
+  const result = { campaign, id:c.id, status, finalTime, checksPassed, maxEnergyResidual, settings:c, software_sha256:sha256(lib), study_source_sha256:sha256(study) };
   fs.writeFileSync(path.join(d,'result.json'), JSON.stringify(result,null,2));
   console.log(`${campaign} ${c.id}: ${status}`);
   return result;
@@ -67,7 +69,7 @@ function runBenchmark() {
   const b = manifest.analytical_benchmark;
   const d = path.join(outRoot, 'benchmark');
   fs.mkdirSync(d,{recursive:true});
-  const src = path.join(here,b.source);
+  const src = [path.join(here,b.source),path.join(here,'code',b.source)].find(fs.existsSync);
   const mos = [
     'loadModel(Modelica,{"4.1.0"},requireExactVersion=true);',
     `loadFile("${src.replaceAll('\\','/')}");`,
@@ -92,18 +94,25 @@ function runBenchmark() {
 
 fs.mkdirSync(outRoot,{recursive:true});
 assertSource(lib, manifest.software.sha256, 'ModelicaHumanBodyPArts v0.10.0 RC1');
-if (manifest.experiment_source.github_sha256) assertSource(study, manifest.experiment_source.github_sha256, 'Article 2 experiment source');
+assertSource(study, study.includes(path.sep+'code'+path.sep) ? manifest.experiment_source.sha256 : (manifest.experiment_source.github_sha256 || manifest.experiment_source.sha256), 'Article 2 experiment source');
 
-const selected = requested === 'all' ? ['nominal','robustness','sensitivity','refinement','benchmark'] : [requested];
+const selected = (requested === 'all'||requested === 'primary-all') ? ['nominal','robustness','sensitivity','refinement','benchmark'] : [requested];
 const allResults=[];
+if(requested==='smoke') selected.splice(0,selected.length,'nominal');
+if(requested==='upperbody') selected.splice(0,selected.length);
 for (const campaign of selected) {
   if (campaign === 'benchmark') allResults.push({campaign,result:runBenchmark()});
   else {
     if (!manifest.campaigns[campaign]) throw new Error('Unknown campaign: '+campaign);
-    for (const c of manifest.campaigns[campaign]) allResults.push(runCase(campaign,c));
+    for (const c of (requested==='smoke' ? manifest.campaigns[campaign].slice(0,1) : manifest.campaigns[campaign])) allResults.push(runCase(campaign,c));
   }
 }
 fs.writeFileSync(path.join(outRoot,'campaign_summary.json'),JSON.stringify(allResults,null,2));
 const failed=allResults.filter(r=>(r.status||r.result?.status)!=='PASS');
 if(failed.length){console.error(`FAILED: ${failed.length} case(s)`);process.exitCode=1;}
 else console.log(`PASS: ${allResults.length} executed case(s)`);
+
+if(requested==='all'||requested==='upperbody') {
+  const supplementary=spawnSync(process.execPath,[path.join(here,'run_article2_upperbody.mjs')],{cwd:here,stdio:'inherit'});
+  if(supplementary.status!==0) process.exitCode=1;
+}

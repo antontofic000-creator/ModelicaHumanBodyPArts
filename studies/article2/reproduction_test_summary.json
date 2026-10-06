@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "environment": {
+    "compiler": "OpenModelica v1.27.1 (64-bit)",
+    "modelica": "4.1.0"
+  },
+  "energy_gate_J": 0.01,
+  "cases": [
+    {
+      "id": "UpperBodyKnownAnswer",
+      "status": "PASS",
+      "expected_final_time": 0.5,
+      "final_time": 0.5,
+      "checks_passed": 1,
+      "max_torque_error_Nm": 0,
+      "max_mass_error_kg": 0,
+      "max_yaw_inertia_error_kg_m2": 0
+    },
+    {
+      "id": "PrimaryLocked",
+      "status": "PASS",
+      "expected_final_time": 1.5,
+      "final_time": 1.5,
+      "checks_passed": 1,
+      "max_abs_energy_residual_J": 9.465273392850193e-8
+    },
+    {
+      "id": "PrimaryYawOnly",
+      "status": "PASS",
+      "expected_final_time": 1.5,
+      "final_time": 1.5,
+      "checks_passed": 1,
+      "max_abs_energy_residual_J": 8.256164563125168e-8
+    },
+    {
+      "id": "PrimaryFull3D",
+      "status": "PASS",
+      "expected_final_time": 1.5,
+      "final_time": 1.5,
+      "checks_passed": 1,
+      "max_abs_energy_residual_J": 9.37985968896271e-8
+    },
+    {
+      "id": "UpperBodyLocked",
+      "status": "PASS",
+      "expected_final_time": 1.5,
+      "final_time": 1.5,
+      "checks_passed": 1,
+      "max_abs_energy_residual_J": 4.884339621646916e-7
+    },
+    {
+      "id": "UpperBodyYawOnly",
+      "status": "PASS",
+      "expected_final_time": 1.5,
+      "final_time": 1.5,
+      "checks_passed": 1,
+      "max_abs_energy_residual_J": 4.985325195161483e-7
+    },
+    {
+      "id": "UpperBodyFull3D",
+      "status": "PASS",
+      "expected_final_time": 1.5,
+      "final_time": 1.5,
+      "checks_passed": 1,
+      "max_abs_energy_residual_J": 0.000002018240022133577
+    }
+  ]
+}

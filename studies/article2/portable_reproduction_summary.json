@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "verified_at": "2026-10-06T00:23:53.630Z",
+  "environment": {
+    "compiler": "OpenModelica v1.27.1 (64-bit)",
+    "modelica": "4.1.0",
+    "node": "v24.19.0",
+    "platform": "Windows x64"
+  },
+  "reproduction_harness": {
+    "total": 7,
+    "passed": 7,
+    "compiler_exit": 0,
+    "summary": "reproduction_test_summary.json"
+  },
+  "negative_control": {
+    "expected_status": "FAIL",
+    "compiler_exit": 1,
+    "modified_channel": "Only a copied PrimaryYawOnly checksPassed channel was set to zero."
+  },
+  "primary_runner": {
+    "executed": 1,
+    "passed": 1,
+    "scope": "One primary nominal case; original primary campaign definitions/data preserved."
+  },
+  "upper_body_known_answer": {
+    "status": "PASS",
+    "torqueError": 0,
+    "checksPassed": 1,
+    "finalTime": 0.5,
+    "massError": 0,
+    "inertiaError": 0
+  },
+  "upper_body_robustness": {
+    "total": 45,
+    "passed": 45,
+    "compiler_runner_exit": 0,
+    "max_abs_energy_residual_J": 0.000002093713914796957,
+    "min_final_time_s": 1.5,
+    "max_final_time_s": 1.502
+  },
+  "adequacy_analysis": {
+    "portable_archived_data_exact_match": true,
+    "fresh_threshold_counts_match": true,
+    "max_abs_summary_eta_difference_percentage_points": 0,
+    "max_abs_summary_EB_difference": 0,
+    "fresh_threshold_counts": {
+      "pelvisYaw": {
+        "pass5": 2,
+        "pass10": 13,
+        "pass20": 15
+      },
+      "thoraxYaw": {
+        "pass5": 13,
+        "pass10": 15,
+        "pass20": 15
+      },
+      "freeDeltaHip[1]": {
+        "pass5": 0,
+        "pass10": 2,
+        "pass20": 15
+      },
+      "heelShare": {
+        "pass5": 0,
+        "pass10": 0,
+        "pass20": 2
+      },
+      "stanceAxis": {
+        "pass5": 0,
+        "pass10": 0,
+        "pass20": 12
+      },
+      "groundForce[1]": {
+        "pass5": 0,
+        "pass10": 0,
+        "pass20": 0
+      },
+      "groundMoment[3]": {
+        "pass5": 0,
+        "pass10": 4,
+        "pass20": 13
+      },
+      "body.cutMomentsWorld[7,3]": {
+        "pass5": 9,
+        "pass10": 14,
+        "pass20": 15
+      }
+    }
+  }
+}
