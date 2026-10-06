@@ -1,15 +1,17 @@
 {
-  "schema_version": 1,
-  "study_title": "When is a rigid pelvis-trunk approximation sufficient? A controlled model-reduction study of lumbar mobility in multibody biomechanics",
+  "schema_version": 2,
+  "study_title": "When is a rigid pelvis–trunk approximation sufficient? An output-specific model-reduction protocol applied to lumbar mobility in multibody biomechanics",
   "software": {
     "version": "0.10.0",
-    "path": "../../src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo",
+    "path": "code/ModelicaHumanBodyPArts_v0_10_0_RC1.mo",
     "sha256": "2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b",
-    "doi": "10.5281/zenodo.22941517"
+    "doi": "10.5281/zenodo.22941517",
+    "repository_path": "../../src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo"
   },
   "experiment_source": {
-    "path": "ModelicaHumanBodyPArtsArticle2.mo",
-    "sha256": "ae354a846f66823457e01520d49bd55e5b863177481bc3fad96abe5439ac6aa6"
+    "path": "code/ModelicaHumanBodyPArtsArticle2.mo",
+    "sha256": "ae354a846f66823457e01520d49bd55e5b863177481bc3fad96abe5439ac6aa6",
+    "repository_path": "ModelicaHumanBodyPArtsArticle2.mo"
   },
   "environment": {
     "openmodelica": "1.27.1",
@@ -745,5 +747,895 @@
     "tolerance": 1e-10,
     "maxStep": 0.0005,
     "verified_max_delta_error_rad": 7.572103222219795e-10
+  },
+  "authors": [
+    {
+      "name": "Toufic Antoun El Halabi",
+      "orcid": "0009-0000-5409-0417",
+      "affiliation": "Physics Department, Faculty of Science - Branch 2, Lebanese University, Lebanon"
+    },
+    {
+      "name": "Nathalie Chahine",
+      "orcid": "0000-0002-6200-7617",
+      "affiliation": "Faculty of Public Health - Branch 2, Lebanese University, Lebanon"
+    }
+  ],
+  "archive_revision": {
+    "version": "rev2-20261006",
+    "date": "2026-10-06",
+    "status": "prepared_for_new_Zenodo_version",
+    "previous_dataset_version_doi": "10.5281/zenodo.22957144",
+    "dataset_concept_doi": "10.5281/zenodo.22957143",
+    "new_dataset_version_doi": null,
+    "primary_manifest_snapshot": "metadata/primary_20260925/article2_manifest.json"
+  },
+  "supplementary_upper_body_inertia": {
+    "source": {
+      "path": "code/ModelicaHumanBodyPArtsArticle2_UpperBody.mo",
+      "repository_path": "ModelicaHumanBodyPArtsArticle2_UpperBody.mo",
+      "sha256": "419f448361230ce6bbbf5b2b49776bfdfff1e0c571b9abca6b8b81e313739e7b",
+      "package": "ModelicaHumanBodyPArtsArticle2UpperBody"
+    },
+    "inertial_scope": "Rigid head and upper limbs attached to thoracic/cervical frame; no active upper-limb torque",
+    "added_mass_kg": 12.615,
+    "added_yaw_inertia_kg_m2": 0.34314807897,
+    "primary_represented_mass_kg": 62.79,
+    "supplementary_represented_mass_kg": 75.405,
+    "known_answer": {
+      "model": "ModelicaHumanBodyPArtsArticle2UpperBody.UpperBodyInertiaKnownAnswer",
+      "status": "PASS",
+      "expected_torque_magnitude_Nm": 0.171574039485,
+      "measured_torque_magnitude_Nm": 0.171574039485,
+      "results_directory": "results/upper_body_inertia/known_answer"
+    },
+    "environment": {
+      "openmodelica": "1.27.1",
+      "modelica_standard_library": "4.1.0",
+      "platform": "Windows x64",
+      "method": "dassl"
+    },
+    "nominal_audit": {
+      "count": 3,
+      "architectures": [
+        "Locked",
+        "YawOnly",
+        "Full3D"
+      ],
+      "results_directory": "results/upper_body_inertia/nominal"
+    },
+    "campaigns": {
+      "robustness": [
+        {
+          "id": "drive_a10_h0p5_A1",
+          "condition": "drive_a10_h0p5",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h0p5_A1.csv"
+        },
+        {
+          "id": "drive_a10_h0p5_A2",
+          "condition": "drive_a10_h0p5",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h0p5_A2.csv"
+        },
+        {
+          "id": "drive_a10_h0p5_A3",
+          "condition": "drive_a10_h0p5",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h0p5_A3.csv"
+        },
+        {
+          "id": "drive_a10_h1_A1",
+          "condition": "drive_a10_h1",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h1_A1.csv"
+        },
+        {
+          "id": "drive_a10_h1_A2",
+          "condition": "drive_a10_h1",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h1_A2.csv"
+        },
+        {
+          "id": "drive_a10_h1_A3",
+          "condition": "drive_a10_h1",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h1_A3.csv"
+        },
+        {
+          "id": "drive_a10_h1p5_A1",
+          "condition": "drive_a10_h1p5",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h1p5_A1.csv"
+        },
+        {
+          "id": "drive_a10_h1p5_A2",
+          "condition": "drive_a10_h1p5",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h1p5_A2.csv"
+        },
+        {
+          "id": "drive_a10_h1p5_A3",
+          "condition": "drive_a10_h1p5",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 10,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a10_h1p5_A3.csv"
+        },
+        {
+          "id": "drive_a15_h0p5_A1",
+          "condition": "drive_a15_h0p5",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h0p5_A1.csv"
+        },
+        {
+          "id": "drive_a15_h0p5_A2",
+          "condition": "drive_a15_h0p5",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h0p5_A2.csv"
+        },
+        {
+          "id": "drive_a15_h0p5_A3",
+          "condition": "drive_a15_h0p5",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h0p5_A3.csv"
+        },
+        {
+          "id": "drive_a15_h1_A1",
+          "condition": "drive_a15_h1",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h1_A1.csv"
+        },
+        {
+          "id": "drive_a15_h1_A2",
+          "condition": "drive_a15_h1",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h1_A2.csv"
+        },
+        {
+          "id": "drive_a15_h1_A3",
+          "condition": "drive_a15_h1",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h1_A3.csv"
+        },
+        {
+          "id": "drive_a15_h1p5_A1",
+          "condition": "drive_a15_h1p5",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h1p5_A1.csv"
+        },
+        {
+          "id": "drive_a15_h1p5_A2",
+          "condition": "drive_a15_h1p5",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h1p5_A2.csv"
+        },
+        {
+          "id": "drive_a15_h1p5_A3",
+          "condition": "drive_a15_h1p5",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a15_h1p5_A3.csv"
+        },
+        {
+          "id": "drive_a20_h0p5_A1",
+          "condition": "drive_a20_h0p5",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h0p5_A1.csv"
+        },
+        {
+          "id": "drive_a20_h0p5_A2",
+          "condition": "drive_a20_h0p5",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h0p5_A2.csv"
+        },
+        {
+          "id": "drive_a20_h0p5_A3",
+          "condition": "drive_a20_h0p5",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -0.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h0p5_A3.csv"
+        },
+        {
+          "id": "drive_a20_h1_A1",
+          "condition": "drive_a20_h1",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h1_A1.csv"
+        },
+        {
+          "id": "drive_a20_h1_A2",
+          "condition": "drive_a20_h1",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h1_A2.csv"
+        },
+        {
+          "id": "drive_a20_h1_A3",
+          "condition": "drive_a20_h1",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h1_A3.csv"
+        },
+        {
+          "id": "drive_a20_h1p5_A1",
+          "condition": "drive_a20_h1p5",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h1p5_A1.csv"
+        },
+        {
+          "id": "drive_a20_h1p5_A2",
+          "condition": "drive_a20_h1p5",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h1p5_A2.csv"
+        },
+        {
+          "id": "drive_a20_h1p5_A3",
+          "condition": "drive_a20_h1p5",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 20,
+            "studyHipAmplitude": -1.5,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/drive_a20_h1p5_A3.csv"
+        },
+        {
+          "id": "fric_0p45_A1",
+          "condition": "fric_0p45",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.45,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/fric_0p45_A1.csv"
+        },
+        {
+          "id": "fric_0p45_A2",
+          "condition": "fric_0p45",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.45,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/fric_0p45_A2.csv"
+        },
+        {
+          "id": "fric_0p45_A3",
+          "condition": "fric_0p45",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.45,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/fric_0p45_A3.csv"
+        },
+        {
+          "id": "fric_0p75_A1",
+          "condition": "fric_0p75",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.75,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/fric_0p75_A1.csv"
+        },
+        {
+          "id": "fric_0p75_A2",
+          "condition": "fric_0p75",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.75,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/fric_0p75_A2.csv"
+        },
+        {
+          "id": "fric_0p75_A3",
+          "condition": "fric_0p75",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.75,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/fric_0p75_A3.csv"
+        },
+        {
+          "id": "kn_100000_A1",
+          "condition": "kn_100000",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 100000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/kn_100000_A1.csv"
+        },
+        {
+          "id": "kn_100000_A2",
+          "condition": "kn_100000",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 100000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/kn_100000_A2.csv"
+        },
+        {
+          "id": "kn_100000_A3",
+          "condition": "kn_100000",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 100000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/kn_100000_A3.csv"
+        },
+        {
+          "id": "kn_400000_A1",
+          "condition": "kn_400000",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 400000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/kn_400000_A1.csv"
+        },
+        {
+          "id": "kn_400000_A2",
+          "condition": "kn_400000",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 400000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/kn_400000_A2.csv"
+        },
+        {
+          "id": "kn_400000_A3",
+          "condition": "kn_400000",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 400000,
+            "studyFreeAnkle": -0.03
+          },
+          "result_path": "results/upper_body_inertia/robustness/kn_400000_A3.csv"
+        },
+        {
+          "id": "posture_am0p02_A1",
+          "condition": "posture_am0p02",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.02
+          },
+          "result_path": "results/upper_body_inertia/robustness/posture_am0p02_A1.csv"
+        },
+        {
+          "id": "posture_am0p02_A2",
+          "condition": "posture_am0p02",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.02
+          },
+          "result_path": "results/upper_body_inertia/robustness/posture_am0p02_A2.csv"
+        },
+        {
+          "id": "posture_am0p02_A3",
+          "condition": "posture_am0p02",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": -0.02
+          },
+          "result_path": "results/upper_body_inertia/robustness/posture_am0p02_A3.csv"
+        },
+        {
+          "id": "posture_a0_A1",
+          "condition": "posture_a0",
+          "architecture": 1,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": 0
+          },
+          "result_path": "results/upper_body_inertia/robustness/posture_a0_A1.csv"
+        },
+        {
+          "id": "posture_a0_A2",
+          "condition": "posture_a0",
+          "architecture": 2,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": 0
+          },
+          "result_path": "results/upper_body_inertia/robustness/posture_a0_A2.csv"
+        },
+        {
+          "id": "posture_a0_A3",
+          "condition": "posture_a0",
+          "architecture": 3,
+          "stop": 1.5,
+          "intervals": 750,
+          "tolerance": 1e-8,
+          "maxStep": 0.004,
+          "overrides": {
+            "studyAnkleAmplitude": 15,
+            "studyHipAmplitude": -1,
+            "studyFriction": 0.6,
+            "studyNormalStiffness": 200000,
+            "studyFreeAnkle": 0
+          },
+          "result_path": "results/upper_body_inertia/robustness/posture_a0_A3.csv"
+        }
+      ]
+    },
+    "verification": {
+      "total": 45,
+      "passed": 45,
+      "energy_gate_J": 0.01,
+      "completion_time_min_s": 1.499,
+      "completion_time_max_s": 1.505,
+      "summary": "results/upper_body_inertia/robustness/verification_summary_corrected.json"
+    },
+    "analysis_outputs": [
+      "results/upper_body_inertia/analysis/robustness_compare_analysis.json",
+      "results/upper_body_inertia/analysis/nominal_upperbody_common_time.json",
+      "results/upper_body_inertia/analysis/upperbody_known_answer_analysis.json"
+    ]
+  },
+  "reproduction_harness": {
+    "wrappers": [
+      "UpperBodyKnownAnswer",
+      "PrimaryLocked",
+      "PrimaryYawOnly",
+      "PrimaryFull3D",
+      "UpperBodyLocked",
+      "UpperBodyYawOnly",
+      "UpperBodyFull3D"
+    ],
+    "node_required": true,
+    "files": {
+      "test.mo": {
+        "path": "test.mo",
+        "sha256": "552d4d8b16d900c7085bbad8d82f49bd46e466d3ab48bee1b5cc3b54c14c36c8"
+      },
+      "run_test.mos": {
+        "path": "run_test.mos",
+        "sha256": "f5f87a0740ab9714ebecf503a61ab2df08a710f6c27568bde5fe63e5ef56ebb7"
+      },
+      "verify_test_results.mjs": {
+        "path": "verify_test_results.mjs",
+        "sha256": "ddd3ba70e767c7e6300f5556d887eeae1a5bec2b26ca186bcf96913d8b399467"
+      },
+      "run_article2_all.mjs": {
+        "path": "run_article2_all.mjs",
+        "sha256": "f154c0965fc2f81450300f51858ee02e3937c9ad317f5da0f0d5ca44a9112f7a"
+      },
+      "run_article2_upperbody.mjs": {
+        "path": "run_article2_upperbody.mjs",
+        "sha256": "79446233253c7ca2e7c2e568fba9921ba78f57c1924fc448f42dabc98719b1c1"
+      },
+      "scripts/analyze_article2_inertia.mjs": {
+        "path": "scripts/analyze_article2_inertia.mjs",
+        "sha256": "5b95b43265399e46a98c17fff5f3b53c75de347b0a3e5ed8ad5a7f5b81c3cf12"
+      }
+    },
+    "smoke_verification_status": "PASS",
+    "smoke_summary": "reproduction_test_summary.json",
+    "verified_environment": {
+      "compiler": "OpenModelica v1.27.1 (64-bit)",
+      "modelica": "4.1.0",
+      "node": "v24.19.0",
+      "platform": "Windows x64"
+    },
+    "negative_control": {
+      "status": "PASS",
+      "meaning": "Intentionally failed checksPassed channel produced FAIL and OpenModelica exit 1; original data unchanged."
+    },
+    "public_layout_verification_status": "PASS",
+    "portable_summary": "portable_reproduction_summary.json"
   }
 }
