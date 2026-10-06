@@ -8,7 +8,7 @@ This study package accompanies a separate revision of the September 25 archive. 
 
 ## Campaigns
 
-Primary: 6 nominal cases, 45 robustness cases, 20 passive-lumbar sensitivity cases, 18 refinement cases, and one analytical two-inertia benchmark.
+Primary: 6 nominal cases, 45 robustness cases, 20 lumbar-impedance sensitivity cases, 18 refinement cases, and one analytical two-inertia benchmark.
 
 Supplementary: de Leva-based head and upper limbs are rigidly attached to the thoracic/cervical frame, adding 12.615 kg and 0.34314807897 kg·m² yaw inertia. Represented mass changes from 62.790 to 75.405 kg; no arbitrary rescaling or active upper-limb torque is introduced. The known-answer inertia test, three nominal audits and all 45 supplementary operating cases passed.
 
@@ -57,11 +57,13 @@ Software (unchanged frozen release): https://doi.org/10.5281/zenodo.22941517
 
 Revised dataset, published October 6, 2026: https://doi.org/10.5281/zenodo.23175126
 
-Revised preprint, published October 6, 2026: https://doi.org/10.5281/zenodo.23175187
+Final manuscript preprint, published October 6, 2026: https://doi.org/10.5281/zenodo.23185698
 
 Dataset concept: https://doi.org/10.5281/zenodo.22957143
 
 Historical September dataset: https://doi.org/10.5281/zenodo.22957144
+
+Previous October 6 preprint (publication-field revision): https://doi.org/10.5281/zenodo.23175187
 
 Historical September preprint: https://doi.org/10.5281/zenodo.22958896
 
