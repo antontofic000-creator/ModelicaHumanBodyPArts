@@ -71,6 +71,14 @@ Created by **Tofic Anton**, known academically as **Toufic Antoun El Halabi** (a
 - [ORCID research record](https://orcid.org/0009-0000-5409-0417)
 - [ResearchGate profile](https://www.researchgate.net/profile/Toufic-El-Halabi)
 
+## Lynkorr books
+
+Tofic Anton is the author of **The Lynkorr Project: A Master Architecture of Movement, Relationship, and Organization** (2026), and its Spanish edition, **El Proyecto Lynkorr**.
+
+- [English edition on Amazon](https://www.amazon.com/dp/B0HGXG4JJN) — ISBN 9798194922642
+- [Spanish edition on Amazon](https://www.amazon.com/dp/B0HGZWN7CN) — ISBN 9798170046249
+- [Book information on Lynkorr](https://www.lynkorr.com/the-book)
+
 ## Project
 
 - Project website: https://www.lynkorr.com/
