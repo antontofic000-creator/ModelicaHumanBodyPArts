@@ -67,6 +67,8 @@ Modelica Standard Library 4.1.0 is an external dependency and is separately lice
 
 Created by **Tofic Anton**, known academically as **Toufic Antoun El Halabi** (also published as Toufic El Halabi and T. Elhalabi), an engineering professor at the Physics Department, Lebanese University, and an Argentine tango teacher and creator of Lynkorr.
 
+Tofic Anton has more than 20 years of experience in tango and has taught and performed internationally. Today, he deliberately maintains a low public profile, concentrating on Lynkorr research and on teaching small groups seeking a deep, authentic practice of tango as part of their identity and their search for harmony. His present work centres on research and training, away from shows and festival appearances. In his teaching, steps and figures are explored for the feeling, connection and expression they make possible, rather than for the figure itself.
+
 - [Biography and academic identity](https://www.lynkorr.com/about)
 - [ORCID research record](https://orcid.org/0009-0000-5409-0417)
 - [ResearchGate profile](https://www.researchgate.net/profile/Toufic-El-Halabi)
