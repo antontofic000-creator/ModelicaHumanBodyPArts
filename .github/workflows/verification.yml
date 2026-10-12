@@ -1,7 +1,6 @@
 name: OpenModelica verification
 on:
   push:
-    branches: [main, 'article1-reproducibility-*']
   pull_request:
   workflow_dispatch:
 permissions:
@@ -10,36 +9,7 @@ concurrency:
   group: verification-${{ github.ref }}
   cancel-in-progress: false
 jobs:
-  layout:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    permissions:
-      contents: write
-    outputs:
-      revision: ${{ steps.layout.outputs.revision }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Check or materialize the storage-only layout
-        id: layout
-        shell: bash
-        env:
-          TARGET_BRANCH: ${{ github.ref_name }}
-          EVENT: ${{ github.event_name }}
-        run: |
-          set -euo pipefail
-          node scripts/package_tree.mjs
-          node scripts/package_tree.mjs --check
-          # One-time author-requested materialization; never writes a tag or main.
-          if [[ "$EVENT" == "push" && "$TARGET_BRANCH" == "article1-reproducibility-20261012" ]]; then
-            git add ModelicaHumanBodyPArts
-            if ! git diff --cached --quiet; then
-              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Materialize lossless Modelica package hierarchy'
-              git push origin "HEAD:$TARGET_BRANCH"
-            fi
-          fi
-          echo "revision=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   release:
-    needs: layout
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     strategy:
@@ -47,35 +17,39 @@ jobs:
       matrix:
         storage: [source, tree]
     container:
-      image: openmodelica/openmodelica:v1.27.1-minimal
+      image: openmodelica/openmodelica:v1.27.1-minimal@sha256:ac9a0223e69b8055d444b42f58ccb9680342b56848c68b81385bf83d7c0ba824
     defaults:
       run:
         shell: bash
     steps:
-      - name: Install runner dependencies
-        run: apt-get update && apt-get install -y --no-install-recommends git nodejs ca-certificates
-      - uses: actions/checkout@v4
+      - name: Install Git and certificates
+        run: apt-get update && apt-get install -y --no-install-recommends git ca-certificates
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          ref: ${{ needs.layout.outputs.revision }}
           persist-credentials: false
-      - name: Exact Modelica Standard Library
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install exact Modelica Standard Library
         run: |
           printf 'ok:=installPackage(Modelica,"4.1.0",exactMatch=true); if not ok then print(getErrorString());exit(1);end if;\ngetErrorString();\n' > /tmp/install.mos
           omc /tmp/install.mos
           omc --version
           node --version
-      - name: Verify lossless package layout
+      - name: Check storage-only layout without changing it
         run: node scripts/package_tree.mjs --check
-      - name: Execute all 50 registered cases
+      - name: Execute all 50 registered release cases
         run: node scripts/run_verification.mjs --out results/release-${{ matrix.storage }} --storage ${{ matrix.storage }}
-      - name: Execute tutorial contracts when present
+      - name: Execute the three guided-contact tutorial contracts
+        run: node scripts/run_verification.mjs --out results/tutorial-${{ matrix.storage }} --storage ${{ matrix.storage }} --suite tutorial
+      - name: External output contracts when supplied
         run: |
-          if test -f tests/tutorial_manifest.json; then
-            node scripts/run_verification.mjs --out results/tutorial-${{ matrix.storage }} --storage ${{ matrix.storage }} --suite tutorial
+          if test -f scripts/check_contracts.mjs; then
+            node scripts/check_contracts.mjs --release results/release-${{ matrix.storage }} --tutorial results/tutorial-${{ matrix.storage }} --out results/external-${{ matrix.storage }}.json
           fi
       - name: Retain numerical evidence, including failures
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: verification-linux-${{ matrix.storage }}
           retention-days: 30
@@ -88,3 +62,22 @@ jobs:
             results/**/*.mos
             results/**/*.log
             results/**/*_init.xml
+            results/external-*.json
+  publication-assets:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Preserve exact checked source and official author template
+        run: |
+          mkdir -p publication-assets
+          git archive --format=zip HEAD -o publication-assets/repository-snapshot.zip
+          curl --fail --location --retry 2 'https://legacyfileshare.elsevier.com/promis_misc/softwarex-osp-template.docx' -o publication-assets/softwarex-osp-template.docx
+          sha256sum publication-assets/* > publication-assets/SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: publication-assets
+          path: publication-assets/
+          retention-days: 30
