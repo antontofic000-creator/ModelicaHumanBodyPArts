@@ -1,94 +1,64 @@
 # ModelicaHumanBodyPArts
 
-[![DOI](https://zenodo.org/badge/1385543378.svg)](https://doi.org/10.5281/zenodo.22941516)
+[![OpenModelica verification](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/actions/workflows/verification.yml/badge.svg?branch=article1-reproducibility-20261012)](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/actions/workflows/verification.yml)
 
-**Public release:** v0.10.0  
-**Verified publication-candidate source:** v0.10.0 RC1  
-**Version-specific Zenodo DOI:** [10.5281/zenodo.22941517](https://doi.org/10.5281/zenodo.22941517)  
-**Concept DOI / all versions:** [10.5281/zenodo.22941516](https://doi.org/10.5281/zenodo.22941516)
+Equation-based research software for auditable reduced human multibody mechanics. Intended users are engineers who need to change support assumptions, inspect net force/moment transmission, or account for variable-impedance energy without confusing an available component with a verified experiment.
 
-**Exact verified source SHA-256:**  
+## Version and scope
+
+The mechanical library of record is **v0.10.0**, archived at [10.5281/zenodo.22941517](https://doi.org/10.5281/zenodo.22941517). Its source filename retains the historical `RC1` suffix; this is not a second version. The exact source SHA-256 is:
+
 `2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b`
 
-ModelicaHumanBodyPArts is a verification-oriented Modelica library for auditable human multibody mechanics. It connects explicit multibody assumptions to source-aware parameters, rigid-body segments and joints, distributed plantar contact, reaction wrenches, power and energy outputs, and reproducible numerical verification.
+The publication companion supplies a lossless package-tree layout, a portable runner, automated Linux verification, documentation and three separate integration examples. These additions do not change the archived source or silently extend the historical 50-case manifest. Cite the original DOI for the mechanical release and the exact repository commit for the companion additions.
 
-## Verified release
+This is **software/mechanical verification, not human or clinical validation**. It does not recover individual muscle forces, joint-surface stress, plantar tissue pressure or injury risk. A compliant contact law is a numerical assumption, not a measured tissue property.
 
-- OpenModelica 1.27.1 (64-bit)
-- Modelica Standard Library 4.1.0
-- Windows x64 verified environment
-- 45 runtime simulations + 5 build-only fixtures
-- 50/50 registered cases passed
-- Two fresh-directory clean reruns passed
-- Source SHA-256: `2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b`
+## Start here
 
-## Downloads and archives
+Install **OpenModelica 1.27.1**, **Modelica Standard Library 4.1.0**, **Node.js 22**, and Git. Node.js 12 is not supported. Preserve LF line endings:
 
-- **Public Master Guide:** [Read/download the 39-page teaching and reproduction guide](ModelicaHumanBodyPArts_v0_10_Public_Master_Guide_Lynkorr.com.pdf)
-- **Archived v0.10.0 release:** [Zenodo DOI 10.5281/zenodo.22941517](https://doi.org/10.5281/zenodo.22941517)
-- **Direct archived release ZIP:** [Download from Zenodo](https://zenodo.org/api/records/22941517/files/antontofic000-creator/ModelicaHumanBodyPArts-V0.10.0.zip/content)
-- **GitHub-hosted open release ZIP:** [Download v0.10.0 open release](ModelicaHumanBodyPArts_v0_10_0_OPEN_RELEASE.zip)
-- **GitHub v0.10.0 release:** [View release](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/releases/tag/v0.10.0)
-- **Exact verified RC1 source:** [`src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo`](src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo)
+```sh
+git -c core.autocrlf=false clone https://github.com/antontofic000-creator/ModelicaHumanBodyPArts.git
+cd ModelicaHumanBodyPArts
+git checkout article1-reproducibility-20261012
+omc scripts/install_dependencies.mos
+node scripts/package_tree.mjs --check
+node scripts/run_verification.mjs --storage tree --out results/release-01
+node scripts/run_verification.mjs --storage tree --suite tutorial --out results/tutorial-01
+node scripts/check_contracts.mjs --release results/release-01 --tutorial results/tutorial-01 --out results/external-01.json
+```
 
-## Studies
+Use `--omc /path/to/omc` or `OMC` when the compiler is not on PATH. On Windows, quote paths containing spaces, for example `--omc "C:/Program Files/OpenModelica1.27.1-64bit/bin/omc.exe"`. The runner never assumes a username, current directory or compiler installation path. Each output directory must be new; failed evidence is not overwritten. The legacy runner filename delegates to the portable implementation.
 
-- **Article 2 lumbar model-reduction study:** [public experiment package, manifest and portable reproduction runner](studies/article2/README.md)
+In OMEdit, load `ModelicaHumanBodyPArts/package.mo`, then `examples/Article1ContactTutorial.mo`. Do not load the monolithic and directory copies together. Dymola and macOS execution are not claimed.
 
-## Repository layout
+## Documentation and examples
 
-- `src/` — exact Modelica source used by the publication-candidate verification campaign
-- `tests/` — registered verification/build manifest
-- `scripts/` — native release runner
-- `verification/` — retained machine-readable verification summary
-- `LICENSE` — MIT License
-- `THIRD_PARTY_NOTICES.md` — dependency and attribution notices
-- `RELEASE_NOTES.md` — release notes
-- `CITATION.cff` — software citation metadata
+- [Documentation index](docs/index.md) and [architecture/output map](docs/architecture.md)
+- [Worked guided-contact tutorial](docs/guided-contact-tutorial.md)
+- [Verification, tolerances and negative controls](docs/verification.md)
+- [Contributing a claim-specific test](CONTRIBUTING.md)
+- [Earlier public master guide](ModelicaHumanBodyPArts_v0_10_Public_Master_Guide_Lynkorr.com.pdf), retained as historical release documentation
 
-## Reproduction
+The guided tutorial uses a bilateral body under gravity. Six compliant plantar elements carry its **vertical** support. A frictionless vertical guide constrains horizontal translation and rotation and may carry those reactions; it carries no vertical load. This is not an unsupported balance simulation. The tutorial also tests a vertical perturbation and a deliberately bypassed contact path.
 
-1. Install OpenModelica 1.27.1 and Modelica Standard Library 4.1.0.
-2. Place the source, test manifest and runner in a working directory, preserving relative references used by the runner.
-3. Run the registered campaign from fresh build products.
-4. Confirm the exact source SHA-256 shown above before interpreting results.
+## Verification evidence
 
-## Scope
+The unchanged release manifest contains **45 runtime cases and five build-only fixtures**. Numerical tolerances reside in the Modelica assertions. The runner checks compiler/runtime success, declared time coverage, finite completion channels and completion stages. Twenty-eight runtime cases last 0.01 s and principally check algebraic/geometric known answers, not long movement trials.
 
-This is reduced rigid-segment mechanical research software. The verification campaign checks declared numerical and mechanical contracts. It does not establish human biological or clinical validity and does not identify individual muscle forces, cartilage stress, ligament strain, injury risk or respiratory physiology.
+GitHub Actions executes all 50 release cases and the three additional tutorial cases separately for the source and package-tree layouts in a pinned OpenModelica Linux container. The badge reflects actual workflow status, not a promise of success. CSV outputs, logs, initialization files, manifests and summaries are retained as artifacts. Download the artifact for a cited run: online artifacts expire after 30 days.
 
-## License
+`SHA256SUMS.txt` covers the immutable source, historical manifest and generated Modelica tree only. Numerical summaries contain hashes for their own evidence. The article submission archive supplies a separate complete file manifest.
 
-Copyright (c) 2026 Tofic Anton. Released under the MIT License. See `LICENSE`.
+## Documented research use
 
-Modelica Standard Library 4.1.0 is an external dependency and is separately licensed by the Modelica Association. See `THIRD_PARTY_NOTICES.md`.
+A developer-authored lumbar model-reduction study compares locked, axial-only and three-coordinate trunk connections using this library. Its public [preprint](https://doi.org/10.5281/zenodo.22958896) and [reproduction dataset](https://doi.org/10.5281/zenodo.22957144) document actual research use. The [Article 2 experiment directory](studies/article2/README.md) remains separate from the general library tests. This is use within the originating programme, not independent adoption or biological validation. No external-user counts or clinical applications are claimed.
 
-## Author
+## Attribution, funding and license
 
-Created by **Tofic Anton**, known academically as **Toufic Antoun El Halabi** (also published as Toufic El Halabi and T. Elhalabi), an engineering professor at the Physics Department, Lebanese University, and an Argentine tango teacher and creator of Lynkorr.
+The software creator **Toufic Antoun El Halabi** also publishes as **Tofic Anton**; both names share [ORCID 0009-0000-5409-0417](https://orcid.org/0009-0000-5409-0417). The original copyright notice is unchanged. The SoftwareX manuscript is co-authored with Nathalie Chahine, who contributed anatomical literature interpretation and manuscript writing/review. El Halabi personally financed the research without external funding.
 
-Tofic Anton has more than 20 years of experience in tango and has taught and performed internationally. Today, he deliberately maintains a low public profile, concentrating on Lynkorr research and on teaching small groups seeking a deep, authentic practice of tango as part of their identity and their search for harmony. His present work centres on research and training, away from shows and festival appearances. In his teaching, steps and figures are explored for the feeling, connection and expression they make possible, rather than for the figure itself.
+Lynkorr is the motivating movement-research project. El Halabi's authorship of a commercial Lynkorr book is disclosed as a competing interest; no purchase or project membership is needed to use the software.
 
-- [Biography and academic identity](https://www.lynkorr.com/about)
-- [ORCID research record](https://orcid.org/0009-0000-5409-0417)
-- [ResearchGate profile](https://www.researchgate.net/profile/Toufic-El-Halabi)
-
-## Lynkorr books
-
-Tofic Anton is the author of **The Lynkorr Project: A Master Architecture of Movement, Relationship, and Organization** (2026), and its Spanish edition, **El Proyecto Lynkorr**.
-
-- [English edition on Amazon](https://www.amazon.com/dp/B0HGXG4JJN) — ISBN 9798194922642
-- [Spanish edition on Amazon](https://www.amazon.com/dp/B0HGZWN7CN) — ISBN 9798170046249
-- [Book information on Lynkorr](https://www.lynkorr.com/the-book)
-
-## Project
-
-- Project website: https://www.lynkorr.com/
-- ORCID: https://orcid.org/0009-0000-5409-0417
-- Repository: https://github.com/antontofic000-creator/ModelicaHumanBodyPArts
-- Version DOI: https://doi.org/10.5281/zenodo.22941517
-- Concept DOI: https://doi.org/10.5281/zenodo.22941516
-
-## Publication status
-
-The associated SoftwareX manuscript is in preparation. No acceptance or publication is claimed here.
+Code is MIT-licensed: [LICENSE](LICENSE) and its identical journal-required alias [Licence.txt](Licence.txt). Modelica Standard Library is a separately licensed external dependency; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). No journal acceptance is claimed.

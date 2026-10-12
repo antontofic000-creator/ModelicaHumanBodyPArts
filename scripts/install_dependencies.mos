@@ -1,0 +1,3 @@
+ok:=installPackage(Modelica,"4.1.0",exactMatch=true);
+if not ok then print(getErrorString());exit(1);end if;
+print(getErrorString());

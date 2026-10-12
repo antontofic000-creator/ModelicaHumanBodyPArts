@@ -1,0 +1,83 @@
+name: OpenModelica verification
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verification-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        storage: [source, tree]
+    container:
+      image: openmodelica/openmodelica:v1.27.1-minimal@sha256:ac9a0223e69b8055d444b42f58ccb9680342b56848c68b81385bf83d7c0ba824
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Install Git and certificates
+        run: apt-get update && apt-get install -y --no-install-recommends git ca-certificates
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install exact Modelica Standard Library and record provenance
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git rev-parse HEAD
+          omc scripts/install_dependencies.mos
+          omc --version
+          node --version
+      - name: Check immutable source and storage-only layout
+        run: |
+          sha256sum -c SHA256SUMS.txt
+          node scripts/package_tree.mjs --check
+      - name: Execute all 50 registered release cases
+        run: node scripts/run_verification.mjs --out results/release-${{ matrix.storage }} --storage ${{ matrix.storage }}
+      - name: Execute the three guided-contact tutorial contracts
+        run: node scripts/run_verification.mjs --out results/tutorial-${{ matrix.storage }} --storage ${{ matrix.storage }} --suite tutorial
+      - name: Check external numerical contracts and corrupted-data rejection
+        run: node scripts/check_contracts.mjs --release results/release-${{ matrix.storage }} --tutorial results/tutorial-${{ matrix.storage }} --out results/external-${{ matrix.storage }}.json
+      - name: Retain numerical evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: verification-linux-${{ matrix.storage }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            results/**/summary.json
+            results/**/manifest.json
+            results/**/result_status.json
+            results/**/*.csv
+            results/**/*.mos
+            results/**/*.log
+            results/**/*_init.xml
+            results/external-*.json
+  publication-assets:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Preserve exact checked source and official author template
+        run: |
+          mkdir -p publication-assets
+          git archive --format=zip HEAD -o publication-assets/repository-snapshot.zip
+          curl --fail --location --retry 2 'https://legacyfileshare.elsevier.com/promis_misc/softwarex-osp-template.docx' -o publication-assets/softwarex-osp-template.docx
+          sha256sum publication-assets/* > publication-assets/SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: publication-assets
+          path: publication-assets/
+          retention-days: 30
