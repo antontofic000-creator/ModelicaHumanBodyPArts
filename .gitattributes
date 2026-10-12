@@ -1,0 +1,9 @@
+# Preserve publication hashes on Windows as well as Unix.
+*.mo text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.cff text eol=lf
+*.txt text eol=lf
+*.order text eol=lf
