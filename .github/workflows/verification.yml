@@ -30,23 +30,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install exact Modelica Standard Library
+      - name: Install exact Modelica Standard Library and record provenance
         run: |
-          printf 'ok:=installPackage(Modelica,"4.1.0",exactMatch=true); if not ok then print(getErrorString());exit(1);end if;\ngetErrorString();\n' > /tmp/install.mos
-          omc /tmp/install.mos
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git rev-parse HEAD
+          omc scripts/install_dependencies.mos
           omc --version
           node --version
-      - name: Check storage-only layout without changing it
-        run: node scripts/package_tree.mjs --check
+      - name: Check immutable source and storage-only layout
+        run: |
+          sha256sum -c SHA256SUMS.txt
+          node scripts/package_tree.mjs --check
       - name: Execute all 50 registered release cases
         run: node scripts/run_verification.mjs --out results/release-${{ matrix.storage }} --storage ${{ matrix.storage }}
       - name: Execute the three guided-contact tutorial contracts
         run: node scripts/run_verification.mjs --out results/tutorial-${{ matrix.storage }} --storage ${{ matrix.storage }} --suite tutorial
-      - name: External output contracts when supplied
-        run: |
-          if test -f scripts/check_contracts.mjs; then
-            node scripts/check_contracts.mjs --release results/release-${{ matrix.storage }} --tutorial results/tutorial-${{ matrix.storage }} --out results/external-${{ matrix.storage }}.json
-          fi
+      - name: Check external numerical contracts and corrupted-data rejection
+        run: node scripts/check_contracts.mjs --release results/release-${{ matrix.storage }} --tutorial results/tutorial-${{ matrix.storage }} --out results/external-${{ matrix.storage }}.json
       - name: Retain numerical evidence, including failures
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

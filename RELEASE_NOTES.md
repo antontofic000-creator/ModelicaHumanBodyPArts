@@ -1,25 +1,18 @@
-# Release notes: ModelicaHumanBodyPArts v0.10.0 RC1
+# Release and publication-companion notes
 
-## Baseline preservation
-The previous v0.9.2 source remains unchanged. The publication candidate is a new source file with its own hash.
+## Mechanical release v0.10.0 (24 September 2026)
 
-## Changes relative to v0.9.2
-1. Added Contact.AuditedPlantarContact as a generic observer wrapper around the existing six-zone plantar contact.
-2. Added heel, midfoot and forefoot normal-load outputs, heel share, support validity and broad-support status.
-3. Added contact stored energy, dissipative loss, power-to-body and energy-identity diagnostics.
-4. Corrected aggregate LoadedSupportBody elastic-energy and damping accounting so time-varying stiffness/damping scales are reflected in the totals.
-5. Added actualStiffness and actualDamping outputs and an explicit modulation-power sign alias for aggregate ledgers.
-6. Added three verification cases: known regional load, heel-unloading detection and gravity-loaded variable-impedance aggregate energy balance.
+The archived source remains unchanged, with SHA-256 `2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b`. Its filename retains the historical RC1 suffix. The software is MIT-licensed and archived at DOI 10.5281/zenodo.22941517. Both case-sensitive release tags are retained because the Zenodo record links to the uppercase spelling.
 
-## Native verification
-OpenModelica 1.27.1 / Modelica Standard Library 4.1.0:
-- 45 runtime simulations PASS.
-- 5 build-only fixtures PASS.
-- Total: 50/50 registered cases PASS.
-- New external contract checker PASS, including a deliberate-perturbation negative control.
+The release adds regional plantar-load/energy observers and aggregate energy accounting using actual scaled stiffness/damping and an explicit stiffness-modulation term. Its manifest contains 45 runtime cases and five build-only fixtures. The 98.1 N known-load case prescribes penetration with gravity disabled; it does not contain a supported 10 kg mass.
 
-## Limits
-The release is mechanical software verification, not human validation. Contact regions are numerical zones. The library does not resolve plantar tissue pressure, individual muscle forces, cartilage stress, injury probability or respiratory physiology.
+## Publication companion (October 2026)
 
-## License
-Released under the MIT License. See LICENSE and THIRD_PARTY_NOTICES.md.
+- Standard 19-package directory layout with exact source reconstruction.
+- Portable Node.js 22 runner without personal paths; fresh directories and explicit completion gates.
+- Linux source/tree CI with pinned OpenModelica 1.27.1 image and Modelica Standard Library 4.1.0.
+- Three additional, separately manifested guided-contact integration cases: equilibrium, vertical perturbation and deliberate support-bypass detection.
+- External CSV contracts with four rejected data corruptions.
+- Neutral documentation, executable tutorial, software-author alias clarification and a license filename alias.
+
+The guide can carry horizontal forces/moments but no vertical force; the new examples do not demonstrate unsupported balance. These companion files are not retroactively part of the original DOI archive. Cite the exact repository commit as well as the original release. Passing mechanical contracts is not biological validation.
