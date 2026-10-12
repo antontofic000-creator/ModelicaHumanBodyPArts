@@ -1,0 +1,90 @@
+name: OpenModelica verification
+on:
+  push:
+    branches: [main, 'article1-reproducibility-*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verification-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  layout:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    outputs:
+      revision: ${{ steps.layout.outputs.revision }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check or materialize the storage-only layout
+        id: layout
+        shell: bash
+        env:
+          TARGET_BRANCH: ${{ github.ref_name }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          node scripts/package_tree.mjs
+          node scripts/package_tree.mjs --check
+          # One-time author-requested materialization; never writes a tag or main.
+          if [[ "$EVENT" == "push" && "$TARGET_BRANCH" == "article1-reproducibility-20261012" ]]; then
+            git add ModelicaHumanBodyPArts
+            if ! git diff --cached --quiet; then
+              git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Materialize lossless Modelica package hierarchy'
+              git push origin "HEAD:$TARGET_BRANCH"
+            fi
+          fi
+          echo "revision=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  release:
+    needs: layout
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        storage: [source, tree]
+    container:
+      image: openmodelica/openmodelica:v1.27.1-minimal
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Install runner dependencies
+        run: apt-get update && apt-get install -y --no-install-recommends git nodejs ca-certificates
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.layout.outputs.revision }}
+          persist-credentials: false
+      - name: Exact Modelica Standard Library
+        run: |
+          printf 'ok:=installPackage(Modelica,"4.1.0",exactMatch=true); if not ok then print(getErrorString());exit(1);end if;\ngetErrorString();\n' > /tmp/install.mos
+          omc /tmp/install.mos
+          omc --version
+          node --version
+      - name: Verify lossless package layout
+        run: node scripts/package_tree.mjs --check
+      - name: Execute all 50 registered cases
+        run: node scripts/run_verification.mjs --out results/release-${{ matrix.storage }} --storage ${{ matrix.storage }}
+      - name: Execute tutorial contracts when present
+        run: |
+          if test -f tests/tutorial_manifest.json; then
+            node scripts/run_verification.mjs --out results/tutorial-${{ matrix.storage }} --storage ${{ matrix.storage }} --suite tutorial
+          fi
+      - name: Retain numerical evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-linux-${{ matrix.storage }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            results/**/summary.json
+            results/**/manifest.json
+            results/**/result_status.json
+            results/**/*.csv
+            results/**/*.mos
+            results/**/*.log
+            results/**/*_init.xml
