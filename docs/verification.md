@@ -4,7 +4,7 @@
 
 **Modelica assertions** contain each fixture's numerical targets and tolerances. Of 45 historical runtime cases, 28 last 0.01 s and chiefly check algebraic/geometric known answers. Five further fixtures test executable generation only.
 
-**The portable runner** checks source/dependency versions, fresh directories, compiler/runtime diagnostics, finite time/completion channels, final time and `checksPassed >= 1`. It does not replace numerical assertions. Build and runtime limits are 600 seconds each.
+**The portable runner** checks source/dependency versions, fresh directories, compiler/runtime diagnostics, finite time/completion channels, final time and `checksPassed >= 1`. It also treats an actual OpenModelica `assertion has been violated` diagnostic as fatal even when the simulator logs that diagnostic at info level. It does not replace numerical assertions. Build and runtime limits are 600 seconds each.
 
 **The external CSV checker** checks eight selected contracts, recomputes tutorial force/energy balances and must reject four corrupted-data controls. This is implementation verification, not biological validation.
 
