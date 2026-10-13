@@ -8,7 +8,7 @@
 
 **The external CSV checker** checks eight selected contracts, recomputes tutorial force/energy balances and must reject four corrupted-data controls. This is implementation verification, not biological validation.
 
-The historical release and new tutorial have separate manifests. Do not add three new cases and call the total the old 50-case release.
+The historical release and new tutorial have separate manifests. Do not add five companion cases and call the total the old 50-case release.
 
 ```sh
 node scripts/package_tree.mjs --check

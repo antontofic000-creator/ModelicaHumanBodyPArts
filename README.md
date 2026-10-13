@@ -21,7 +21,7 @@ Install **OpenModelica 1.27.1**, **Modelica Standard Library 4.1.0**, **Node.js 
 ```sh
 git -c core.autocrlf=false clone https://github.com/antontofic000-creator/ModelicaHumanBodyPArts.git
 cd ModelicaHumanBodyPArts
-git checkout article1-reproducibility-20261012
+git checkout main
 omc scripts/install_dependencies.mos
 node scripts/package_tree.mjs --check
 node scripts/run_verification.mjs --storage tree --out results/release-01
