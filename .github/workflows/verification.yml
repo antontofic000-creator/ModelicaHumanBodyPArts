@@ -43,7 +43,7 @@ jobs:
           node scripts/package_tree.mjs --check
       - name: Execute all 50 registered release cases
         run: node scripts/run_verification.mjs --out results/release-${{ matrix.storage }} --storage ${{ matrix.storage }}
-      - name: Execute the five guided-contact tutorial contracts
+      - name: Execute the three guided-contact tutorial contracts
         run: node scripts/run_verification.mjs --out results/tutorial-${{ matrix.storage }} --storage ${{ matrix.storage }} --suite tutorial
       - name: Check external numerical contracts and corrupted-data rejection
         run: node scripts/check_contracts.mjs --release results/release-${{ matrix.storage }} --tutorial results/tutorial-${{ matrix.storage }} --out results/external-${{ matrix.storage }}.json
@@ -81,5 +81,3 @@ jobs:
           name: publication-assets
           path: publication-assets/
           retention-days: 30
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]
