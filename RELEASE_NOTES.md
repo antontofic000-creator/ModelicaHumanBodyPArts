@@ -11,8 +11,10 @@ The release adds regional plantar-load/energy observers and aggregate energy acc
 - Standard 19-package directory layout with exact source reconstruction.
 - Portable Node.js 22 runner without personal paths; fresh directories and explicit completion gates.
 - Linux source/tree CI with pinned OpenModelica 1.27.1 image and Modelica Standard Library 4.1.0.
-- Three additional, separately manifested guided-contact integration cases: equilibrium, vertical perturbation and deliberate support-bypass detection.
+- Five additional, separately manifested integration cases: equilibrium, vertical perturbation, ideal-support bypass detection, pitch-driven regional redistribution and a nonzero parallel-support bypass control.
 - External CSV contracts with four rejected data corruptions.
 - Neutral documentation, executable tutorial, software-author alias clarification and a license filename alias.
 
 The guide can carry horizontal forces/moments but no vertical force; the new examples do not demonstrate unsupported balance. These companion files are not retroactively part of the original DOI archive. Cite the exact repository commit as well as the original release. Passing mechanical contracts is not biological validation.
+
+[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]

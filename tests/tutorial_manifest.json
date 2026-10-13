@@ -1,10 +1,44 @@
 {
   "source_sha256": "2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b",
   "release": "0.10.0",
-  "scope": "Additional guided mechanical verification; not part of the historical 50-case release",
+  "scope": "Additional guided mechanical verification; five cases, not part of the historical 50-case release",
   "cases": [
-    {"name":"GuidedStandingContact","model":"Article1ContactTutorial.GuidedStandingContact","kind":"sim","stop":0.75,"intervals":750},
-    {"name":"GuidedStandingPerturbation","model":"Article1ContactTutorial.GuidedStandingPerturbation","kind":"sim","stop":0.75,"intervals":750},
-    {"name":"SupportBypassNegativeControl","model":"Article1ContactTutorial.SupportBypassNegativeControl","kind":"sim","stop":0.75,"intervals":750}
+    {
+      "name": "GuidedStandingContact",
+      "model": "Article1ContactTutorial.GuidedStandingContact",
+      "kind": "sim",
+      "stop": 0.75,
+      "intervals": 750
+    },
+    {
+      "name": "GuidedStandingPerturbation",
+      "model": "Article1ContactTutorial.GuidedStandingPerturbation",
+      "kind": "sim",
+      "stop": 0.75,
+      "intervals": 750
+    },
+    {
+      "name": "SupportBypassNegativeControl",
+      "model": "Article1ContactTutorial.SupportBypassNegativeControl",
+      "kind": "sim",
+      "stop": 0.75,
+      "intervals": 750
+    },
+    {
+      "name": "GuidedPitchRedistribution",
+      "model": "Article1RegionalRedistribution.GuidedPitchRedistribution",
+      "kind": "sim",
+      "stop": 0.75,
+      "intervals": 750
+    },
+    {
+      "name": "ParallelSupportNegativeControl",
+      "model": "Article1ParallelSupport.ParallelSupportNegativeControl",
+      "kind": "sim",
+      "stop": 0.75,
+      "intervals": 750
+    }
   ]
 }
+
+[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]
