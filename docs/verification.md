@@ -6,9 +6,9 @@
 
 **The portable runner** checks source/dependency versions, fresh directories, compiler/runtime diagnostics, finite time/completion channels, final time and `checksPassed >= 1`. It does not replace numerical assertions. Build and runtime limits are 600 seconds each.
 
-**The external CSV checker** checks six selected contracts, recomputes tutorial force/energy balances and must reject four corrupted-data controls. This is implementation verification, not biological validation.
+**The external CSV checker** checks eight selected contracts, recomputes tutorial force/energy balances and must reject four corrupted-data controls. This is implementation verification, not biological validation.
 
-The historical release and new tutorial have separate manifests. Do not add three new cases and call the total the old 50-case release.
+The historical release and new tutorial have separate manifests. Do not add five companion cases and call the total the old 50-case release.
 
 ```sh
 node scripts/package_tree.mjs --check
@@ -28,12 +28,12 @@ Online artifacts expire after 30 days. Preserve evidence for the cited commit in
 
 ## Windows reproduction record
 
-The 2026-10-12 Windows audit completed all 50 distinct cases across two attempts. Attempt 1 passed cases 1–34, then a new 120-second compiler timeout stopped case 35 before runtime. Restoring the release runner's original 600-second limit allowed cases 35–50 to pass in new directories. Preserve the interruption; it was not a numerical assertion failure and was not an uninterrupted campaign. Three new tutorial cases also passed on Windows using tree storage.
+The 2026-10-12 Windows audit completed all 50 distinct cases across two attempts. Attempt 1 passed cases 1–34, then a new 120-second compiler timeout stopped case 35 before runtime. Restoring the release runner's original 600-second limit allowed cases 35–50 to pass in new directories. Preserve the interruption; it was not a numerical assertion failure and was not an uninterrupted campaign. Five tutorial cases passed on Windows using tree storage, including the pitch-redistribution and nonzero parallel-support controls.
 
 ## Correct interpretation of the release fixtures
 
 `AuditedPlantarKnownLoadTest` disables gravity and contains no moving mass. Six prescribed penetrations of 0.1635 mm into 100,000 N/m springs give 16.35 N each, 98.1 N total and 32.7 N per pair. This equals the weight of 10 kg at 9.81 m/s², but it is not a supported 10 kg body.
 
-`AuditedPlantarHeelUnloadTest` prescribes the heel above ground and the other regions loaded; it does not simulate a heel-lift trajectory. The existing variable-impedance energy test is gravity-loaded but uses ideal fixed support. The separate guided tutorial demonstrates a gravity-loaded distributed vertical load path.
+`AuditedPlantarHeelUnloadTest` prescribes the heel above ground and the other regions loaded; it does not simulate a heel-lift trajectory. The existing variable-impedance energy test is gravity-loaded but uses ideal fixed support. The separate guided tutorial demonstrates a gravity-loaded distributed vertical load path. Its pitch case additionally demonstrates regional redistribution under a small internal ankle torque, and its parallel-support negative control shows why nonzero plantar loads alone do not prove complete support accounting.
 
 No human participants, clinical outcomes, unsupported balance, Dymola/macOS execution, independent-user adoption or general stability guarantee is established. A source hash identifies bytes, not physiology. Biological use requires task-specific comparison with matched measurements, anatomy, represented mass and boundary conditions.

@@ -36,7 +36,7 @@ der(dissipated) = body.dissipationPower + contact.lossPower;
 
 All declarations, inertial parameters and initialization are supplied in the executable file, not left to the reader to infer.
 
-## Inspect the three cases
+## Inspect the five cases
 
 **GuidedStandingContact** starts at vertical equilibrium. Inspect `normalLoad`, six `contact.zoneNormalForce` channels, `regionalShares` and `guideVerticalForce`. Contact forces support represented weight; the guide supplies no vertical force.
 
@@ -44,9 +44,13 @@ All declarations, inertial parameters and initialization are supplied in the exe
 
 **SupportBypassNegativeControl** deliberately retains ideal fixed support while attaching contact observers. Contact loads are zero and ideal support carries weight. PASS means that `bypassObserved` correctly detects this invalid route for a plantar-support claim; it does not mean the bypass satisfies that claim.
 
+**GuidedPitchRedistribution** adds one allowed support rotation about the foot's mediolateral axis. A 3 N.m smooth internal ankle torque changes the regional load distribution; on the Windows qualification run heel share moved from the pre-pulse baseline by more than 0.01 while the independently recomputed force residual remained below 1e-3 N and the actuator-inclusive energy residual below 1e-6 J. Exact numerical values are reported by the retained checker output. This is a numerical redistribution demonstration, not a calibrated human pressure pattern.
+
+**ParallelSupportNegativeControl** keeps the vertical guide but adds an unobserved seventh contact at the sole. The six audited plantar contacts therefore carry a large, plausible nonzero load while the extra path carries the remainder. The declared geometry uses equal stiffnesses, giving a known 6/7 versus 1/7 split. PASS means the support-accounting check detects the incomplete observed path.
+
 ## Acceptance criteria
 
-The model continuously asserts guide vertical force below 1e-7 N, force residual below 1e-3 N, body-plus-contact energy residual below 1e-3 J, contact identity below 1e-6 W and non-tensile normal forces. At 0.74 s support must be within 1% of weight and shares within 1e-8 of one-third. Stop time is 0.75 s.
+The model continuously asserts guide vertical force below 1e-7 N, force residual below 1e-3 N, body-plus-contact energy residual below 1e-6 J, contact identity below 1e-6 W and non-tensile normal forces. At 0.74 s support must be within 1% of weight and shares within 1e-8 of one-third. Stop time is 0.75 s.
 
 After the release suite and tutorial, run:
 
@@ -54,6 +58,6 @@ After the release suite and tutorial, run:
 node scripts/check_contracts.mjs --release results/release-01 --tutorial results/tutorial-01 --out results/external-01.json
 ```
 
-The external checker recomputes force/energy identities from CSV and rejects a wrong value, missing channel, nonfinite value and truncated time coverage. It is separate code, not an independent research group.
+The external checker checks eight selected contracts, recomputes force/energy identities from CSV where applicable, and rejects a wrong value, missing channel, nonfinite value and truncated time coverage. It is separate code, not an independent research group.
 
 Change parameters only in separately named experiments. Removing the guide creates a new initialization/balance problem requiring new tests; a guided PASS cannot certify unsupported standing. Changing contact-point count without rescaling aggregate stiffness changes the mechanical model, not merely resolution.

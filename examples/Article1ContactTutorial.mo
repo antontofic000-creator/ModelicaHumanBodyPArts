@@ -71,7 +71,7 @@ package Article1ContactTutorial
     der(dissipated)=body.dissipationPower+contact.lossPower;
     assert(abs(guideVerticalForce)<1e-7,"Guide bypassed the vertical contact load path");
     assert(abs(forceResidual)<1e-3,"Whole represented-body vertical force balance failed");
-    assert(abs(energyResidual)<1e-3,"Body plus contact energy balance failed");
+    assert(abs(energyResidual)<1e-6,"Body plus contact energy balance failed");
     assert(abs(contact.identityResidual)<1e-6,"Contact power identity failed");
     assert(min(contact.zoneNormalForce)>=0,"Tensile normal contact force");
   algorithm
