@@ -9,14 +9,14 @@ const options={};
 for(let i=2;i<process.argv.length;i+=2){const k=process.argv[i],v=process.argv[i+1];if(!k?.startsWith('--')||v===undefined)throw Error('Arguments must be --key value');options[k.slice(2)]=v;}
 const repo=path.resolve(options.repo||path.join(path.dirname(fileURLToPath(import.meta.url)),'..'));
 const omc=options.omc||process.env.OMC||'omc',storage=options.storage||'source',suite=options.suite||'release';
-if(!['source','tree'].includes(storage)||!['release','tutorial'].includes(suite))throw Error('Invalid storage or suite');
-if(!options.out)throw Error('Usage: node scripts/run_verification.mjs --out NEW_DIRECTORY [--storage source|tree] [--suite release|tutorial] [--omc EXECUTABLE]');
+if(!['source','tree'].includes(storage)||!['release','tutorial','diagnostic'].includes(suite))throw Error('Invalid storage or suite');
+if(!options.out)throw Error('Usage: node scripts/run_verification.mjs --out NEW_DIRECTORY [--storage source|tree] [--suite release|tutorial|diagnostic] [--omc EXECUTABLE]');
 const out=path.resolve(options.out),source=path.join(repo,'src/ModelicaHumanBodyPArts_v0_10_0_RC1.mo');
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const expected='2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b';
 if(sha(source)!==expected)throw Error('Immutable source hash mismatch. Clone with core.autocrlf=false.');
 if(storage==='tree'){const r=spawnSync(process.execPath,[path.join(repo,'scripts/package_tree.mjs'),'--check'],{encoding:'utf8'});if(r.status!==0)throw Error('Package-tree integrity failed: '+r.stderr);}
-const mp=path.join(repo,suite==='release'?'tests/v010_test_manifest.json':'tests/tutorial_manifest.json');
+const mp=path.join(repo,suite==='release'?'tests/v010_test_manifest.json':suite==='tutorial'?'tests/tutorial_manifest.json':'tests/diagnostic_manifest.json');
 const manifest=JSON.parse(fs.readFileSync(mp,'utf8'));
 if(manifest.source_sha256!==expected)throw Error('Manifest source hash mismatch');
 if(suite==='release'&&(manifest.cases.length!==50||manifest.cases.filter(c=>c.kind==='sim').length!==45))throw Error('Release case inventory changed');
@@ -46,7 +46,7 @@ summary('RUNNING');
 for(const c of manifest.cases){
  const d=path.join(out,c.name);fs.mkdirSync(d);const rec={...c,status:'FAIL',started_utc:new Date().toISOString()};
  try{
-  const extra=suite==='tutorial'?['examples/Article1ContactTutorial.mo','examples/Article1RegionalRedistribution.mo','examples/Article1ParallelSupport.mo'].map((f,i)=>`ok:=loadFile("${esc(path.join(repo,f))}");if not ok then print(getErrorString());exit(${12+i});end if;\n`).join(''):'';
+  const extra=(suite==='tutorial'||suite==='diagnostic')?['examples/Article1ContactTutorial.mo','examples/Article1RegionalRedistribution.mo','examples/Article1ParallelSupport.mo'].map((f,i)=>`ok:=loadFile("${esc(path.join(repo,f))}");if not ok then print(getErrorString());exit(${12+i});end if;\n`).join(''):'';
   const script=`ok:=loadModel(Modelica,{"4.1.0"},requireExactVersion=true);if not ok then print(getErrorString());exit(10);end if;\nok:=loadFile("${esc(load)}",requireExactVersion=true);if not ok then print(getErrorString());exit(11);end if;\n${extra}print("MSL="+getVersion(Modelica)+"\\n");print("LIB="+getVersion(ModelicaHumanBodyPArts)+"\\n");\nb:=buildModel(${c.model},startTime=0,stopTime=${c.stop},numberOfIntervals=${c.intervals},tolerance=1e-8,method="dassl",outputFormat="csv",fileNamePrefix="model");print(getErrorString());print("EXEC="+b[1]+"\\n");`;
   fs.writeFileSync(path.join(d,'build.mos'),script);
   const b=spawnSync(compiler,['build.mos'],{cwd:d,env,encoding:'utf8',timeout:600000,maxBuffer:50000000});

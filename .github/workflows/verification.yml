@@ -43,8 +43,10 @@ jobs:
           node scripts/package_tree.mjs --check
       - name: Execute all 50 registered release cases
         run: node scripts/run_verification.mjs --out results/release-${{ matrix.storage }} --storage ${{ matrix.storage }}
-      - name: Execute the five guided-contact tutorial contracts
+      - name: Execute the four publication-facing tutorial contracts
         run: node scripts/run_verification.mjs --out results/tutorial-${{ matrix.storage }} --storage ${{ matrix.storage }} --suite tutorial
+      - name: Execute the separate pitch diagnostic
+        run: node scripts/run_verification.mjs --out results/diagnostic-${{ matrix.storage }} --storage ${{ matrix.storage }} --suite diagnostic
       - name: Check external numerical contracts and corrupted-data rejection
         run: node scripts/check_contracts.mjs --release results/release-${{ matrix.storage }} --tutorial results/tutorial-${{ matrix.storage }} --out results/external-${{ matrix.storage }}.json
       - name: Retain numerical evidence, including failures

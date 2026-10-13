@@ -6,15 +6,16 @@
 
 **The portable runner** checks source/dependency versions, fresh directories, compiler/runtime diagnostics, finite time/completion channels, final time and `checksPassed >= 1`. It also treats an actual OpenModelica `assertion has been violated` diagnostic as fatal even when the simulator logs that diagnostic at info level. It does not replace numerical assertions. Build and runtime limits are 600 seconds each.
 
-**The external CSV checker** checks eight selected contracts, recomputes tutorial force/energy balances and must reject four corrupted-data controls. This is implementation verification, not biological validation.
+**The external CSV checker** checks seven selected publication contracts, recomputes tutorial force/energy balances and must reject four corrupted-data controls. This is implementation verification, not biological validation.
 
-The historical release and new tutorial have separate manifests. Do not add five companion cases and call the total the old 50-case release.
+The historical release, publication-facing tutorial and exploratory diagnostic have separate manifests. Do not add companion or diagnostic cases and call the total the old 50-case release.
 
 ```sh
 node scripts/package_tree.mjs --check
 node scripts/run_verification.mjs --storage source --out results/source-01
 node scripts/run_verification.mjs --storage tree --out results/tree-01
 node scripts/run_verification.mjs --storage tree --suite tutorial --out results/tutorial-01
+node scripts/run_verification.mjs --storage tree --suite diagnostic --out results/diagnostic-01
 node scripts/check_contracts.mjs --release results/tree-01 --tutorial results/tutorial-01 --out results/external-01.json
 ```
 
@@ -28,12 +29,12 @@ Online artifacts expire after 30 days. Preserve evidence for the cited commit in
 
 ## Windows reproduction record
 
-The 2026-10-12 Windows audit completed all 50 distinct cases across two attempts. Attempt 1 passed cases 1–34, then a new 120-second compiler timeout stopped case 35 before runtime. Restoring the release runner's original 600-second limit allowed cases 35–50 to pass in new directories. Preserve the interruption; it was not a numerical assertion failure and was not an uninterrupted campaign. Five tutorial cases passed on Windows using tree storage, including the pitch-redistribution and nonzero parallel-support controls.
+The 2026-10-12 Windows audit completed all 50 distinct cases across two attempts. Attempt 1 passed cases 1–34, then a new 120-second compiler timeout stopped case 35 before runtime. Restoring the release runner's original 600-second limit allowed cases 35–50 to pass in new directories. Preserve the interruption; it was not a numerical assertion failure and was not an uninterrupted campaign. Four publication-facing tutorial cases passed on Windows using tree storage. The pitch case is retained separately as an exploratory diagnostic; its 0.75 s run passes local identities, but a long-horizon extension continues tipping and is not used as publication evidence.
 
 ## Correct interpretation of the release fixtures
 
 `AuditedPlantarKnownLoadTest` disables gravity and contains no moving mass. Six prescribed penetrations of 0.1635 mm into 100,000 N/m springs give 16.35 N each, 98.1 N total and 32.7 N per pair. This equals the weight of 10 kg at 9.81 m/s², but it is not a supported 10 kg body.
 
-`AuditedPlantarHeelUnloadTest` prescribes the heel above ground and the other regions loaded; it does not simulate a heel-lift trajectory. The existing variable-impedance energy test is gravity-loaded but uses ideal fixed support. The separate guided tutorial demonstrates a gravity-loaded distributed vertical load path. Its pitch case additionally demonstrates transient regional redistribution under a small internal ankle torque, and its parallel-support negative control detects incomplete support from the mismatch between audited plantar support and whole-body demand. The directly available hidden-contact force is used only as a known construction cross-check, not as the detection signal.
+`AuditedPlantarHeelUnloadTest` prescribes the heel above ground and the other regions loaded; it does not simulate a heel-lift trajectory. The existing variable-impedance energy test is gravity-loaded but uses ideal fixed support. The separate guided tutorial demonstrates a gravity-loaded distributed vertical load path. Its parallel-support negative control detects incomplete support from the mismatch between audited plantar support and whole-body demand. The directly available hidden-contact force is used only as a known construction cross-check, not as the detection signal.
 
 No human participants, clinical outcomes, unsupported balance, Dymola/macOS execution, independent-user adoption or general stability guarantee is established. A source hash identifies bytes, not physiology. Biological use requires task-specific comparison with matched measurements, anatomy, represented mass and boundary conditions.

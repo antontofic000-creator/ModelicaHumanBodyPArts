@@ -36,15 +36,13 @@ der(dissipated) = body.dissipationPower + contact.lossPower;
 
 All declarations, inertial parameters and initialization are supplied in the executable file, not left to the reader to infer.
 
-## Inspect the five cases
+## Inspect the four publication-facing cases
 
 **GuidedStandingContact** starts at vertical equilibrium. Inspect `normalLoad`, six `contact.zoneNormalForce` channels, `regionalShares` and `guideVerticalForce`. Contact forces support represented weight; the guide supplies no vertical force.
 
 **GuidedStandingPerturbation** changes only `initialLift` to 0.1 mm. This is a dynamic integration test, not prescribed penetration. Instantaneous support need not equal weight: check `normalLoad - m*g - m*a_COM,z`. Total energy includes body kinetic/gravitational/elastic energy and contact storage; adding body/contact dissipation gives the closed balance.
 
 **SupportBypassNegativeControl** deliberately retains ideal fixed support while attaching contact observers. Contact loads are zero and ideal support carries weight. PASS means that `bypassObserved` correctly detects this invalid route for a plantar-support claim; it does not mean the bypass satisfies that claim.
-
-**GuidedPitchRedistribution** adds one allowed support rotation about the foot's mediolateral axis. A 3 N.m smooth internal ankle torque changes the regional load distribution; on the Windows qualification run heel share moved from the pre-pulse baseline by more than 0.01 while the independently recomputed force residual remained below 1e-3 N and the actuator-inclusive energy residual below 1e-6 J. Exact numerical values are reported by the retained checker output. This is a numerical redistribution demonstration, not a calibrated human pressure pattern.
 
 **ParallelSupportNegativeControl** keeps the vertical guide but adds an unobserved seventh contact at the sole. The six audited plantar contacts therefore carry a large, plausible nonzero load while the extra path carries the remainder. The declared geometry uses equal stiffnesses, giving a known 6/7 versus 1/7 split. The detection criterion uses only the audited plantar total and whole-body vertical demand, `normalLoad - m*g - m*a_COM,z`; its final gap is approximately -mg/7. The hidden-path force is retained only as a constructed-control cross-check.
 
@@ -58,6 +56,10 @@ After the release suite and tutorial, run:
 node scripts/check_contracts.mjs --release results/release-01 --tutorial results/tutorial-01 --out results/external-01.json
 ```
 
-The external checker checks eight selected contracts, recomputes force/energy identities from CSV where applicable, and rejects a wrong value, missing channel, nonfinite value and truncated time coverage. It is separate code, not an independent research group.
+The external checker checks seven selected publication contracts, recomputes force/energy identities from CSV where applicable, and rejects a wrong value, missing channel, nonfinite value and truncated time coverage. It is separate code, not an independent research group.
 
 Change parameters only in separately named experiments. Removing the guide creates a new initialization/balance problem requiring new tests; a guided PASS cannot certify unsupported standing. Changing contact-point count without rescaling aggregate stiffness changes the mechanical model, not merely resolution.
+
+## Separate exploratory diagnostic
+
+`Article1RegionalRedistribution.GuidedPitchRedistribution` remains available under `tests/diagnostic_manifest.json` for diagnostic use only. It is excluded from manuscript claims because a long-horizon extension shows continued tipping rather than convergence to a stable equilibrium. Its short-horizon PASS therefore verifies only local force/energy identities and signal wiring, not stable regional redistribution.

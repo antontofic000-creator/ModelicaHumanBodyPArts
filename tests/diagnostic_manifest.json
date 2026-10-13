@@ -1,0 +1,14 @@
+{
+  "source_sha256": "2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b",
+  "release": "0.10.0",
+  "scope": "Exploratory diagnostics excluded from publication claims; short-horizon execution does not establish stable equilibrium",
+  "cases": [
+    {
+      "name": "GuidedPitchRedistribution",
+      "model": "Article1RegionalRedistribution.GuidedPitchRedistribution",
+      "kind": "sim",
+      "stop": 0.75,
+      "intervals": 750
+    }
+  ]
+}
