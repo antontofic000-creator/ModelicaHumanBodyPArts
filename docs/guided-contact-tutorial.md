@@ -46,7 +46,7 @@ All declarations, inertial parameters and initialization are supplied in the exe
 
 **GuidedPitchRedistribution** adds one allowed support rotation about the foot's mediolateral axis. A 3 N.m smooth internal ankle torque changes the regional load distribution; on the Windows qualification run heel share moved from the pre-pulse baseline by more than 0.01 while the independently recomputed force residual remained below 1e-3 N and the actuator-inclusive energy residual below 1e-6 J. Exact numerical values are reported by the retained checker output. This is a numerical redistribution demonstration, not a calibrated human pressure pattern.
 
-**ParallelSupportNegativeControl** keeps the vertical guide but adds an unobserved seventh contact at the sole. The six audited plantar contacts therefore carry a large, plausible nonzero load while the extra path carries the remainder. The declared geometry uses equal stiffnesses, giving a known 6/7 versus 1/7 split. PASS means the support-accounting check detects the incomplete observed path.
+**ParallelSupportNegativeControl** keeps the vertical guide but adds an unobserved seventh contact at the sole. The six audited plantar contacts therefore carry a large, plausible nonzero load while the extra path carries the remainder. The declared geometry uses equal stiffnesses, giving a known 6/7 versus 1/7 split. The detection criterion uses only the audited plantar total and whole-body vertical demand, `normalLoad - m*g - m*a_COM,z`; its final gap is approximately -mg/7. The hidden-path force is retained only as a constructed-control cross-check.
 
 ## Acceptance criteria
 
