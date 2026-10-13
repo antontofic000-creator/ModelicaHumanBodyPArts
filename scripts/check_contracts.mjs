@@ -39,10 +39,11 @@ function pitch(d){completion(d,.75);const m=col(d,'body.representedMass'),f=col(
  const iBase=time.findIndex(t=>t>=.14-1e-12),i34=time.reduce((best,t,i)=>Math.abs(t-.34)<Math.abs(time[best]-.34)?i:best,0);
  return {baseline_heel_share:share[iBase],heel_share_change_at_0_34:change[i34],max_postbaseline_heel_share_change:maxChange,max_ankle_torque_Nm:maxAct,max_pitch_rad:maxabs(col(d,'guidePitch')),max_force_residual_N:maxabs(force),max_energy_residual_J:maxabs(energy),final_heel_share:last(share)};
 }
-function parallel(d){completion(d,.75);const m=col(d,'body.representedMass'),p=col(d,'normalLoad'),b=col(d,'bypassLoad'),t=col(d,'totalSupport'),a=col(d,'body.representedCOMAcceleration[3]'),g=col(d,'guideVerticalForce');
- const force=t.map((v,i)=>v-m[i]*9.81-m[i]*a[i]);bounded(g,1e-7,'Parallel-case vertical guide reaction');bounded(force,1e-3,'Parallel-case force balance');
- const frac=last(p)/last(t),bf=last(b)/last(t);if(!(frac>.80&&frac<.90&&bf>.10&&bf<.20))throw Error('Parallel support shares not detected');
- return {plantar_fraction:frac,bypass_fraction:bf,final_total_support_N:last(t),weight_N:last(m)*9.81,max_force_residual_N:maxabs(force)};
+function parallel(d){completion(d,.75);const m=col(d,'body.representedMass'),p=col(d,'normalLoad'),b=col(d,'bypassLoad'),t=col(d,'totalSupport'),a=col(d,'body.representedCOMAcceleration[3]'),g=col(d,'guideVerticalForce'),gap=col(d,'plantarDemandGap');
+ const force=t.map((v,i)=>v-m[i]*9.81-m[i]*a[i]);bounded(g,1e-7,'Parallel-case vertical guide reaction');bounded(force,1e-3,'Parallel-case total-support force balance');
+ const finalGap=last(gap),weight=last(m)*9.81;if(Math.abs(finalGap)<=.05*weight)throw Error('Plantar-only completeness gap did not expose hidden support');
+ const frac=last(p)/last(t),bf=last(b)/last(t);if(!(frac>.80&&frac<.90&&bf>.10&&bf<.20))throw Error('Constructed parallel-support cross-check failed');
+ return {plantar_demand_gap_N:finalGap,plantar_gap_fraction_of_weight:finalGap/weight,plantar_fraction:frac,bypass_fraction:bf,final_total_support_N:last(t),weight_N:weight,max_force_residual_N:maxabs(force)};
 }
 const specs=[['release','AuditedPlantarKnownLoadTest',known],['release','AuditedPlantarHeelUnloadTest',heel],['release','LoadedSupportVariableImpedanceEnergyTest',impedance],['tutorial','GuidedStandingContact',guided],['tutorial','GuidedStandingPerturbation',guided],['tutorial','SupportBypassNegativeControl',bypass],['tutorial','GuidedPitchRedistribution',pitch],['tutorial','ParallelSupportNegativeControl',parallel]];
 const results=[],data={};for(const [root,name,fn] of specs){try{const d=read(args[root],name);data[name]=d;const metrics=fn(d);results.push({name,status:'PASS',csv_sha256:d.sha256,metrics});}catch(e){results.push({name,status:'FAIL',error:e.message});}}

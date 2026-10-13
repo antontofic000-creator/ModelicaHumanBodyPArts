@@ -53,6 +53,7 @@ package Article1ParallelSupport
     output SI.Force totalSupport=normalLoad+bypassLoad;
     output Real plantarFraction=normalLoad/totalSupport;
     output SI.Force guideVerticalForce=groundFrame.frame_b.f[3];
+    output SI.Force plantarDemandGap=normalLoad-mass*9.81-mass*body.representedCOMAcceleration[3];
     output SI.Force forceResidual=totalSupport-mass*9.81-mass*body.representedCOMAcceleration[3];
     output Real regionalShares[3]={contact.heelLoad,contact.midfootLoad,contact.forefootLoad}/normalLoad;
     output SI.Energy dissipated(start=0,fixed=true);
@@ -85,10 +86,12 @@ package Article1ParallelSupport
       assert(abs(body.representedMass-mass)<1e-10,"Represented mass mismatch");
       assert(abs(totalSupport-mass*9.81)<0.01*mass*9.81,"Final total support has not settled within one percent of weight");
       assert(contact.broadSupport and min(regionalShares)>0.05,"A regional pair lost support");
+      assert(abs(plantarDemandGap)>0.05*mass*9.81,
+        "Plantar-only completeness check failed to expose the hidden support");
       assert(plantarFraction>0.80 and plantarFraction<0.90,
         "Audited plantar path did not carry the expected large but incomplete share");
       assert(bypassLoad/totalSupport>0.10 and bypassLoad/totalSupport<0.20,
-        "Parallel support share was not detected");
+        "Direct hidden-path cross-check did not match the constructed control");
       checksPassed:=1;
     end when;
     annotation(experiment(StopTime=0.75,Interval=0.001,Tolerance=1e-8),Documentation(info="<html><p>This is a guided mechanical verification, not free standing or human balance validation. The guide carries no vertical force. Six audited plantar contacts and one deliberately unobserved central contact act in parallel. The audited plantar channels therefore look plausibly loaded while carrying only six sevenths of total vertical support. PASS means the accounting detects that incomplete path; it does not certify the bypassed configuration.</p></html>"));
