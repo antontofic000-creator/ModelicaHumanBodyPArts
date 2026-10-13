@@ -30,7 +30,7 @@ fs.mkdirSync(out,{recursive:true});fs.copyFileSync(mp,path.join(out,'manifest.js
 const started=new Date().toISOString(),records=[];
 const revision=spawnSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).stdout?.trim()||null;
 const summary=status=>{const x={status,suite,storage,source_sha256:expected,manifest_sha256:sha(mp),runner_sha256:sha(fileURLToPath(import.meta.url)),git_commit:revision,compiler:v.stdout.trim(),platform:process.platform,architecture:process.arch,started_utc:started,updated_utc:new Date().toISOString(),expected_cases:manifest.cases.length,completed_cases:records.length,passed_cases:records.filter(c=>c.status==='PASS').length,results:records};fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify(x,null,2));return x;};
-const fatal=/(?:\b(?:error|fatal)\s*:|LOG_ASSERT\s*\|\s*error|division by zero|assertion[^\n]*failed)/im;
+const fatal=/(?:\b(?:error|fatal)\s*:|LOG_ASSERT\s*\|\s*error|division by zero|assertion[^\n]*failed|assertion has been violated)/im;
 const esc=s=>s.replaceAll('\\','/').replaceAll('"','\\"');
 const load=storage==='source'?source:path.join(repo,'ModelicaHumanBodyPArts/package.mo');
 function completion(file,c){
@@ -46,7 +46,7 @@ summary('RUNNING');
 for(const c of manifest.cases){
  const d=path.join(out,c.name);fs.mkdirSync(d);const rec={...c,status:'FAIL',started_utc:new Date().toISOString()};
  try{
-  const extra=suite==='tutorial'?`ok:=loadFile("${esc(path.join(repo,'examples/Article1ContactTutorial.mo'))}");if not ok then print(getErrorString());exit(12);end if;\n`:'';
+  const extra=suite==='tutorial'?['examples/Article1ContactTutorial.mo','examples/Article1RegionalRedistribution.mo','examples/Article1ParallelSupport.mo'].map((f,i)=>`ok:=loadFile("${esc(path.join(repo,f))}");if not ok then print(getErrorString());exit(${12+i});end if;\n`).join(''):'';
   const script=`ok:=loadModel(Modelica,{"4.1.0"},requireExactVersion=true);if not ok then print(getErrorString());exit(10);end if;\nok:=loadFile("${esc(load)}",requireExactVersion=true);if not ok then print(getErrorString());exit(11);end if;\n${extra}print("MSL="+getVersion(Modelica)+"\\n");print("LIB="+getVersion(ModelicaHumanBodyPArts)+"\\n");\nb:=buildModel(${c.model},startTime=0,stopTime=${c.stop},numberOfIntervals=${c.intervals},tolerance=1e-8,method="dassl",outputFormat="csv",fileNamePrefix="model");print(getErrorString());print("EXEC="+b[1]+"\\n");`;
   fs.writeFileSync(path.join(d,'build.mos'),script);
   const b=spawnSync(compiler,['build.mos'],{cwd:d,env,encoding:'utf8',timeout:600000,maxBuffer:50000000});

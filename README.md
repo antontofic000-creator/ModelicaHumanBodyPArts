@@ -1,6 +1,6 @@
 # ModelicaHumanBodyPArts
 
-[![OpenModelica verification](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/actions/workflows/verification.yml/badge.svg?branch=article1-reproducibility-20261012)](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/actions/workflows/verification.yml)
+[![OpenModelica verification](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/actions/workflows/verification.yml/badge.svg?branch=main)](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/actions/workflows/verification.yml)
 
 Equation-based research software for auditable reduced human multibody mechanics. Intended users are engineers who need to change support assumptions, inspect net force/moment transmission, or account for variable-impedance energy without confusing an available component with a verified experiment.
 
@@ -10,7 +10,7 @@ The mechanical library of record is **v0.10.0**, archived at [10.5281/zenodo.229
 
 `2fda3b797ef9304529776d0610a3a8608e233c92531924579cb2eafe6665de4b`
 
-The publication companion supplies a lossless package-tree layout, a portable runner, automated Linux verification, documentation and three separate integration examples. These additions do not change the archived source or silently extend the historical 50-case manifest. Cite the original DOI for the mechanical release and the exact repository commit for the companion additions.
+The publication companion supplies a lossless package-tree layout, a portable runner, automated Linux verification, documentation and five separate integration examples. These additions do not change the archived source or silently extend the historical 50-case manifest. Cite the original DOI for the mechanical release and the exact repository commit for the companion additions.
 
 This is **software/mechanical verification, not human or clinical validation**. It does not recover individual muscle forces, joint-surface stress, plantar tissue pressure or injury risk. A compliant contact law is a numerical assumption, not a measured tissue property.
 
@@ -41,13 +41,13 @@ In OMEdit, load `ModelicaHumanBodyPArts/package.mo`, then `examples/Article1Cont
 - [Contributing a claim-specific test](CONTRIBUTING.md)
 - [Earlier public master guide](ModelicaHumanBodyPArts_v0_10_Public_Master_Guide_Lynkorr.com.pdf), retained as historical release documentation
 
-The guided tutorial uses a bilateral body under gravity. Six compliant plantar elements carry its **vertical** support. A frictionless vertical guide constrains horizontal translation and rotation and may carry those reactions; it carries no vertical load. This is not an unsupported balance simulation. The tutorial also tests a vertical perturbation and a deliberately bypassed contact path.
+The guided tutorial uses a bilateral body under gravity. Six compliant plantar elements carry its **vertical** support. A frictionless vertical guide constrains horizontal translation and rotation and may carry those reactions; it carries no vertical load. A fourth case additionally frees sagittal pitch and applies a small internal ankle torque, producing measured heel-to-forefoot redistribution while force and actuator-inclusive energy balances remain closed. A fifth hard negative control adds a deliberately unobserved parallel contact path: the audited plantar channels remain strongly loaded but carry only 6/7 of total support. These are mechanical verification cases, not unsupported balance or human plantar-pressure validation.
 
 ## Verification evidence
 
 The unchanged release manifest contains **45 runtime cases and five build-only fixtures**. Numerical tolerances reside in the Modelica assertions. The runner checks compiler/runtime success, declared time coverage, finite completion channels and completion stages. Twenty-eight runtime cases last 0.01 s and principally check algebraic/geometric known answers, not long movement trials.
 
-GitHub Actions executes all 50 release cases and the three additional tutorial cases separately for the source and package-tree layouts in a pinned OpenModelica Linux container. The badge reflects actual workflow status, not a promise of success. CSV outputs, logs, initialization files, manifests and summaries are retained as artifacts. Download the artifact for a cited run: online artifacts expire after 30 days.
+GitHub Actions executes all 50 release cases and the five additional tutorial cases separately for the source and package-tree layouts in a pinned OpenModelica Linux container. The badge reflects actual workflow status, not a promise of success. CSV outputs, logs, initialization files, manifests and summaries are retained as artifacts. Download the artifact for a cited run: online artifacts expire after 30 days.
 
 `SHA256SUMS.txt` covers the immutable source, historical manifest and generated Modelica tree only. Numerical summaries contain hashes for their own evidence. The article submission archive supplies a separate complete file manifest.
 
