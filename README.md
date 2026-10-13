@@ -62,5 +62,3 @@ The software creator **Toufic Antoun El Halabi** also publishes as **Tofic Anton
 Lynkorr is the motivating movement-research project. El Halabi's authorship of a commercial Lynkorr book is disclosed as a competing interest; no purchase or project membership is needed to use the software.
 
 Code is MIT-licensed: [LICENSE](LICENSE) and its identical journal-required alias [Licence.txt](Licence.txt). Modelica Standard Library is a separately licensed external dependency; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). No journal acceptance is claimed.
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]

@@ -37,5 +37,3 @@ The 2026-10-12 Windows audit completed all 50 distinct cases across two attempts
 `AuditedPlantarHeelUnloadTest` prescribes the heel above ground and the other regions loaded; it does not simulate a heel-lift trajectory. The existing variable-impedance energy test is gravity-loaded but uses ideal fixed support. The separate guided tutorial demonstrates a gravity-loaded distributed vertical load path. Its pitch case additionally demonstrates regional redistribution under a small internal ankle torque, and its parallel-support negative control shows why nonzero plantar loads alone do not prove complete support accounting.
 
 No human participants, clinical outcomes, unsupported balance, Dymola/macOS execution, independent-user adoption or general stability guarantee is established. A source hash identifies bytes, not physiology. Biological use requires task-specific comparison with matched measurements, anatomy, represented mass and boundary conditions.
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]

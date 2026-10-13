@@ -61,5 +61,3 @@ node scripts/check_contracts.mjs --release results/release-01 --tutorial results
 The external checker checks eight selected contracts, recomputes force/energy identities from CSV where applicable, and rejects a wrong value, missing channel, nonfinite value and truncated time coverage. It is separate code, not an independent research group.
 
 Change parameters only in separately named experiments. Removing the guide creates a new initialization/balance problem requiring new tests; a guided PASS cannot certify unsupported standing. Changing contact-point count without rescaling aggregate stiffness changes the mechanical model, not merely resolution.
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]

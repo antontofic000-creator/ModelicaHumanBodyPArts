@@ -70,5 +70,3 @@ for(const c of manifest.cases){
 }
 summary(records.length===manifest.cases.length?'PASS':'INCOMPLETE');
 console.log('PASS '+suite+' / '+storage+' / '+records.length+' cases');
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]

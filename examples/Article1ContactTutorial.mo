@@ -103,5 +103,3 @@ package Article1ContactTutorial
     end when;
   end SupportBypassNegativeControl;
 end Article1ContactTutorial;
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]

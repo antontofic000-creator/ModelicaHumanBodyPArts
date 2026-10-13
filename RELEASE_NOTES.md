@@ -16,5 +16,3 @@ The release adds regional plantar-load/energy observers and aggregate energy acc
 - Neutral documentation, executable tutorial, software-author alias clarification and a license filename alias.
 
 The guide can carry horizontal forces/moments but no vertical force; the new examples do not demonstrate unsupported balance. These companion files are not retroactively part of the original DOI archive. Cite the exact repository commit as well as the original release. Passing mechanical contracts is not biological validation.
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]

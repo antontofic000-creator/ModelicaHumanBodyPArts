@@ -47,5 +47,3 @@ if(original){for(const kind of ['wrong_value','missing_channel','nonfinite','tru
 const status=results.length===8&&results.every(r=>r.status==='PASS')&&negatives.length===4&&negatives.every(x=>x.rejected)?'PASS':'FAIL';
 const out={status,checker_sha256:hash(fileURLToPath(import.meta.url)),created_utc:new Date().toISOString(),scope:'External numerical checks of eight selected contracts; not human validation or independent authorship',results,negative_data_controls:negatives};
 fs.mkdirSync(path.dirname(path.resolve(args.out)),{recursive:true});fs.writeFileSync(args.out,JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));if(status!=='PASS')process.exit(2);
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]

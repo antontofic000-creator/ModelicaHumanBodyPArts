@@ -95,5 +95,3 @@ package Article1ParallelSupport
     annotation(experiment(StopTime=0.75,Interval=0.001,Tolerance=1e-8),Documentation(info="<html><p>This is a guided mechanical verification, not free standing or human balance validation. The guide carries no vertical force. Six audited plantar contacts and one deliberately unobserved central contact act in parallel. The audited plantar channels therefore look plausibly loaded while carrying only six sevenths of total vertical support. PASS means the accounting detects that incomplete path; it does not certify the bypassed configuration.</p></html>"));
   end ParallelSupportNegativeControl;
 end Article1ParallelSupport;
-
-[executed on device: TouficH (74019b9f-1258-495a-b5bd-5ed462e41e36)]
