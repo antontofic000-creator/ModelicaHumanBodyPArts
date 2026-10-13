@@ -30,7 +30,7 @@ fs.mkdirSync(out,{recursive:true});fs.copyFileSync(mp,path.join(out,'manifest.js
 const started=new Date().toISOString(),records=[];
 const revision=spawnSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).stdout?.trim()||null;
 const summary=status=>{const x={status,suite,storage,source_sha256:expected,manifest_sha256:sha(mp),runner_sha256:sha(fileURLToPath(import.meta.url)),git_commit:revision,compiler:v.stdout.trim(),platform:process.platform,architecture:process.arch,started_utc:started,updated_utc:new Date().toISOString(),expected_cases:manifest.cases.length,completed_cases:records.length,passed_cases:records.filter(c=>c.status==='PASS').length,results:records};fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify(x,null,2));return x;};
-const fatal=/(?:\b(?:error|fatal)\s*:|LOG_ASSERT\s*\|\s*error|division by zero|assertion[^\n]*failed)/im;
+const fatal=/(?:\b(?:error|fatal)\s*:|LOG_ASSERT\s*\|\s*error|division by zero|assertion[^\n]*failed|assertion has been violated)/im;
 const esc=s=>s.replaceAll('\\','/').replaceAll('"','\\"');
 const load=storage==='source'?source:path.join(repo,'ModelicaHumanBodyPArts/package.mo');
 function completion(file,c){

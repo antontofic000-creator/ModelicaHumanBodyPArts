@@ -76,7 +76,6 @@ package Article1ParallelSupport
     body.hipYawActuation=0;
     der(dissipated)=body.dissipationPower+contact.lossPower;
     assert(abs(guideVerticalForce)<1e-7,"Guide bypassed the vertical contact load path");
-    assert(abs(forceResidual)<1e-3,"Whole represented-body vertical force balance failed");
     // Energy is not asserted here because ContactPoint does not expose an audited energy ledger; this negative control checks support accounting.
     assert(abs(forceResidual)<1e-3,"Whole represented-body vertical force balance with parallel support failed");
     assert(abs(contact.identityResidual)<1e-6,"Contact power identity failed");
@@ -84,7 +83,7 @@ package Article1ParallelSupport
   algorithm
     when time>=0.74 then
       assert(abs(body.representedMass-mass)<1e-10,"Represented mass mismatch");
-      assert(abs(normalLoad-mass*9.81)<0.01*mass*9.81,"Final support has not settled within one percent of weight");
+      assert(abs(totalSupport-mass*9.81)<0.01*mass*9.81,"Final total support has not settled within one percent of weight");
       assert(contact.broadSupport and min(regionalShares)>0.05,"A regional pair lost support");
       assert(plantarFraction>0.80 and plantarFraction<0.90,
         "Audited plantar path did not carry the expected large but incomplete share");
