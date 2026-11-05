@@ -1,5 +1,7 @@
 # ModelicaHumanBodyPArts
 
+**Software creator:** [Tofic Anton / Toufic Antoun El Halabi](AUTHOR.md), creator of [Lynkorr — official website](https://www.lynkorr.com/).
+
 [![OpenModelica verification](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/actions/workflows/verification.yml/badge.svg?branch=main)](https://github.com/antontofic000-creator/ModelicaHumanBodyPArts/actions/workflows/verification.yml)
 
 Equation-based research software for auditable reduced human multibody mechanics. Intended users are engineers who need to change support assumptions, inspect net force/moment transmission, or account for variable-impedance energy without confusing an available component with a verified experiment.
