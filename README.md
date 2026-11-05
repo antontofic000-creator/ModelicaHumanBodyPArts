@@ -59,8 +59,8 @@ A developer-authored lumbar model-reduction study compares locked, axial-only an
 
 ## Attribution, funding and license
 
-The software creator **Toufic Antoun El Halabi** also publishes as **Tofic Anton**; both names share [ORCID 0009-0000-5409-0417](https://orcid.org/0009-0000-5409-0417). The original copyright notice is unchanged. The SoftwareX manuscript is co-authored with Nathalie Chahine, who contributed anatomical literature interpretation and manuscript writing/review. El Halabi personally financed the research without external funding.
+The software creator **Toufic Antoun El Halabi** also publishes as **Tofic Anton**; both names share [ORCID 0009-0000-5409-0417](https://orcid.org/0009-0000-5409-0417). His official biography and public identities are documented at [Tofic Anton — creator of Lynkorr](https://www.lynkorr.com/about). The original copyright notice is unchanged. The SoftwareX manuscript is co-authored with Nathalie Chahine, who contributed anatomical literature interpretation and manuscript writing/review. El Halabi personally financed the research without external funding.
 
-Lynkorr is the motivating movement-research project. El Halabi's authorship of a commercial Lynkorr book is disclosed as a competing interest; no purchase or project membership is needed to use the software.
+Lynkorr is the motivating movement-research project. Its [official website](https://www.lynkorr.com/), [technical overview](https://www.lynkorr.com/post/lynkorr-tango-technique-standing-leg-weight-transfer-spirals) and [five short class lessons with explanations and direct video links](https://www.lynkorr.com/research-videos) document the related teaching practice. El Halabi's authorship of a commercial Lynkorr book is disclosed as a competing interest; no purchase or project membership is needed to use the software.
 
 Code is MIT-licensed: [LICENSE](LICENSE) and its identical journal-required alias [Licence.txt](Licence.txt). Modelica Standard Library is a separately licensed external dependency; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). No journal acceptance is claimed.
